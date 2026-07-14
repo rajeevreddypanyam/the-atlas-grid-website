@@ -1,0 +1,15 @@
+<svg width="420" height="112" viewBox="0 0 420 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="8" y1="12" x2="102" y2="102" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#70F2D2"/>
+      <stop offset="1" stop-color="#5CB8FF"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <path d="M55 8L94 30V74L55 96L16 74V30L55 8Z" stroke="url(#g)" stroke-width="4"/>
+    <path d="M74 36C69 27 59 22 49 24C34 27 26 41 29 56C32 71 46 80 61 77C69 76 76 71 80 65V53H56" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="84" cy="27" r="5" fill="#A6FF6F"/>
+  </g>
+  <text x="118" y="62" fill="white" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="800" letter-spacing="3">GOS</text>
+  <text x="120" y="88" fill="#8EA8B6" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="600" letter-spacing="2.5">GLOBAL ONLINE SOLUTIONS</text>
+</svg>
