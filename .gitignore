@@ -1,5 +1,7 @@
 .next/
 .open-next/
+dist/
+.wrangler/
 node_modules/
 .DS_Store
 npm-debug.log*
