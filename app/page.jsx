@@ -185,10 +185,9 @@ function Hero() {
     <section id="overview" className="hero observed" data-index="0">
       <div className="heroBackdrop"><Image src="/assets/hero-equipment.jpg" alt="Drone survey equipment montage" fill priority sizes="100vw"/></div>
       <div className="heroGrid" aria-hidden="true" />
-      <div className="heroScan" aria-hidden="true" />
       <div className="heroContent shell">
         <div className="heroCopy">
-          <Eyebrow>Aerial intelligence / India</Eyebrow>
+          <Eyebrow>Aerial intelligence from India</Eyebrow>
           <h1>Survey the<br/><span>unseen.</span></h1>
           <p>GOS turns aerial capture into precise, decision-ready intelligence for land, infrastructure, energy, mining and the built environment.</p>
           <div className="heroActions">
@@ -196,12 +195,29 @@ function Hero() {
             <a href="#evidence" className="textButton">View field evidence <ArrowRight size={17}/></a>
           </div>
         </div>
-        <div className="heroInstrument" aria-label="Survey capability status">
-          <div className="radar">
-            <span className="radarSweep"/><i className="ping p1"/><i className="ping p2"/><i className="ping p3"/>
-            <div className="radarCenter"><Crosshair/><b>RTK</b><small>PRECISION LOCK</small></div>
+        <div className="heroInstrument" aria-label="Animated aerial survey flight">
+          <div className="aerialWindow">
+            <Image src="/assets/mission-map.jpg" alt="Aerial survey mission map" fill priority sizes="(max-width: 850px) 320px, 430px"/>
+            <div className="aerialShade"/>
+            <svg className="flightRoute" viewBox="0 0 500 420" aria-hidden="true">
+              <path d="M-40 330 C80 250 140 355 238 245 S365 130 550 78"/>
+              <circle cx="67" cy="294" r="5"/>
+              <circle cx="414" cy="118" r="5"/>
+            </svg>
+            <div className="flyingDrone" aria-hidden="true">
+              <svg viewBox="0 0 120 72">
+                <path d="M44 31h32l8 9-11 5H47l-11-5 8-9Z"/>
+                <path d="M43 34 25 21M77 34 95 21M44 43 25 54M76 43 95 54"/>
+                <ellipse cx="19" cy="17" rx="17" ry="4"/><ellipse cx="101" cy="17" rx="17" ry="4"/>
+                <ellipse cx="19" cy="58" rx="17" ry="4"/><ellipse cx="101" cy="58" rx="17" ry="4"/>
+                <circle cx="60" cy="48" r="6"/>
+              </svg>
+              <span className="cameraCone"/>
+            </div>
+            <div className="flightCard top"><span>FLIGHT 02</span><strong>120 m AGL</strong></div>
+            <div className="flightCard bottom"><span>POSITIONING</span><strong><i/> RTK ACTIVE</strong></div>
           </div>
-          <div className="instrumentReadout"><span>CAPTURE STATUS</span><strong><i/>MISSION READY</strong></div>
+          <p className="flightCaption"><span>Live mission planning</span><b>Precise capture. Defensible data.</b></p>
         </div>
       </div>
       <div className="heroMetrics shell">
