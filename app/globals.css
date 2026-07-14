@@ -1,14 +1,14 @@
 :root {
-  --ink: #111c23;
-  --ink-2: #18262f;
-  --panel: #1d2d36;
-  --line: rgba(217, 216, 207, .17);
-  --muted: #94a1a5;
-  --paper: #f4f1e9;
-  --cyan: #839aa7;
-  --mint: #b48957;
-  --lime: #c8b392;
-  --orange: #a86f4f;
+  --ink: #17313b;
+  --ink-2: #28424d;
+  --panel: #304c58;
+  --line: rgba(220, 219, 209, .2);
+  --muted: #9babad;
+  --paper: #fffaf2;
+  --cyan: #7ca6b5;
+  --mint: #ca8240;
+  --lime: #dfbd87;
+  --orange: #bd7043;
   --shell: min(1240px, calc(100vw - 128px));
 }
 
@@ -363,6 +363,62 @@ body { color: var(--paper); background: var(--ink); }
   .flightCard.bottom { left: 20px; bottom: 20px; }
   .flightCaption { display: grid; gap: 5px; }
   @keyframes droneCruise { 0%,100% { transform: translate3d(-5px, 5px, 0); } 50% { transform: translate3d(55px, -44px, 0); } }
+}
+
+/* Brighter premium palette */
+.siteHeader { color: #17313b; border-color: rgba(35,55,62,.13); background: rgba(250,247,239,.94); box-shadow: 0 8px 30px rgba(34,49,55,.05); }
+.logoWords strong { color: #17313b; }
+.logoWords small { color: #6f7f83; }
+.logoMark svg path:nth-child(2) { stroke: #17313b; }
+.topNav > a { color: #4f6268; }
+.topNav > a:hover { color: #17313b; }
+.topNav .navCta { color: #a76329; }
+.presentButton { color: #17313b; border-color: rgba(35,55,62,.2); background: rgba(255,255,255,.55); }
+.menuButton { color: #17313b; }
+
+.hero { color: #17313b; background: #f8f3e9; }
+.heroBackdrop { opacity: .55; }
+.heroBackdrop img { filter: grayscale(.18) sepia(.04) saturate(.72) contrast(.96) brightness(1.08); }
+.heroBackdrop:after { background: linear-gradient(90deg, #f8f3e9 0%, rgba(248,243,233,.95) 49%, rgba(248,243,233,.63) 77%, rgba(248,243,233,.82) 100%), linear-gradient(0deg, #f8f3e9 0, transparent 48%, rgba(248,243,233,.55) 100%); }
+.heroGrid { background-image: linear-gradient(rgba(23,49,59,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(23,49,59,.045) 1px, transparent 1px); }
+.hero .eyebrow { color: #a8682e; }
+.heroCopy h1 { color: #17313b; }
+.hero h1 span { color: #c47c39; }
+.heroCopy p { color: #4e6268; }
+.primaryButton { background: #cc8442; color: white; box-shadow: 0 13px 30px rgba(167,99,41,.16); }
+.primaryButton:hover { background: #b56f31; }
+.textButton { color: #263f48; border-color: rgba(38,63,72,.3); }
+.heroMetrics { border-color: rgba(23,49,59,.18); }
+.heroMetrics div { border-color: rgba(23,49,59,.14); }
+.heroMetrics strong { color: #17313b; }
+.heroMetrics span,
+.scrollCue { color: #65767a; }
+.railTrack { background: rgba(23,49,59,.16); }
+.rail a { color: #829095; }
+.rail a.active { color: #a8682e; }
+.railTrack span { background: #bd7739; }
+.aerialWindow { border-color: rgba(23,49,59,.18); box-shadow: 0 30px 65px rgba(37,50,55,.2); }
+.flightCaption { color: #687a7e; }
+.flightCaption b { color: #334b54; }
+
+.method,
+.deliverables { background: #fffaf2; }
+.sectors { background: #eef3f1; }
+.capabilities { background: #304b57; }
+.evidence { background: #29414c; }
+.brief { background: #304954; }
+.briefGlow { background: radial-gradient(circle, rgba(225,189,135,.16), transparent 69%); }
+.sensorList { background: #29434e; }
+.sectorTabs { background: #263f49; }
+.sectorExplorer { background: #263f49; }
+.caseStage { background: #203742; }
+.briefBuilder { background: rgba(36,59,69,.92); }
+
+@media (max-width: 850px) {
+  .topNav { background: rgba(250,247,239,.99); border-color: rgba(35,55,62,.13); }
+  .topNav > a { color: #304a53; }
+  .heroBackdrop { opacity: .42; }
+  .heroBackdrop:after { background: linear-gradient(180deg, rgba(248,243,233,.9), rgba(248,243,233,.78) 54%, #f8f3e9 83%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
