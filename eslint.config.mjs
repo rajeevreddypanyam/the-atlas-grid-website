@@ -5,5 +5,5 @@ const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
 
 export default defineConfig([
   ...compat.extends("next/core-web-vitals"),
-  globalIgnores([".next/**", ".open-next/**"]),
+  globalIgnores([".next/**", ".open-next/**", "dist/**"]),
 ]);
