@@ -1,19 +1,19 @@
 # The Atlas Grid Website
 
-This repository is a saved copy of the live **The Atlas Grid** website.
+The editable source for **The Atlas Grid**, a premium interactive aerial survey and geospatial intelligence website for Global Online Solutions.
 
-Live site:
+Live site:  
 https://gos-aerial-intelligence.ihatemuzik.chatgpt.site/
 
-## What is inside
+## Design
 
-- `index.html` is the saved website page.
-- `atlas-grid.css` is the saved design/style file.
-- `assets/` contains the images used by the website.
-- `_next/` contains the small script files used by the saved page.
+- Full-screen aerial mission experience
+- Interactive RGB and thermal comparison
+- Sector-specific survey stories
+- Fieldwork project gallery
+- Mission scope builder
+- Responsive mobile and desktop layouts
 
-## Hosting note
+## Hosting
 
-The live website is still hosted on `chatgpt.site`. Saving this repository to GitHub does not change or move the live hosting.
-
-In simple words: GitHub is now the backup cupboard for the website files, and `chatgpt.site` is still the front door visitors use.
+The website remains hosted on `chatgpt.site`. GitHub stores the editable project and its history; ChatGPT Sites remains the live front door.
