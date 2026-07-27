@@ -8,7 +8,6 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  CircleDot,
   Clipboard,
   Crosshair,
   Expand,
@@ -28,260 +27,245 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-const sections = [
-  ["01", "Overview", "overview"],
-  ["02", "Method", "method"],
-  ["03", "Capabilities", "capabilities"],
-  ["04", "Sectors", "sectors"],
-  ["05", "Evidence", "evidence"],
-  ["06", "Deliverables", "deliverables"],
-  ["07", "Brief", "brief"],
+const navigation = [
+  ["Capabilities", "capabilities"],
+  ["Sectors", "sectors"],
+  ["Approach", "approach"],
+  ["Projects", "projects"],
+  ["Deliverables", "deliverables"],
 ];
 
 const sectors = [
   {
     name: "Renewable energy",
-    kicker: "Inspect. Diagnose. Protect output.",
+    eyebrow: "Protect energy output",
+    title: "Inspect assets at portfolio scale.",
     copy: "Thermal and RGB surveys identify hotspots, faulty modules, alignment issues, vegetation growth and visible defects across solar plants, wind assets and power corridors.",
-    deliverables: ["Thermal anomaly maps", "Panel-wise inspection logs", "Annotated condition reports"],
+    outputs: ["Thermal anomaly maps", "Panel-level inspection logs", "Condition reports"],
     image: "/assets/thermal-panels.jpg",
     icon: Zap,
   },
   {
     name: "Mining & quarry",
-    kicker: "Measure every movement.",
-    copy: "High-resolution aerial capture enables pit and dump mapping, stockpile volume measurement, haul-road analysis and repeatable change detection for operational control.",
-    deliverables: ["Cut / fill analysis", "Stockpile volumes", "Mine-site 2D and 3D models"],
+    eyebrow: "Measure every movement",
+    title: "Turn changing terrain into operational control.",
+    copy: "High-resolution aerial capture supports pit and dump mapping, stockpile measurement, haul-road analysis and repeatable change detection.",
+    outputs: ["Cut-and-fill analysis", "Stockpile volumes", "Site models"],
     image: "/assets/jsw-stockpile.jpg",
     icon: Mountain,
   },
   {
     name: "Infrastructure",
-    kicker: "See the corridor before construction.",
-    copy: "RTK and PPK-enabled corridor mapping captures terrain, structures, utilities and right-of-way conditions for roads, railways, telecom and pipelines.",
-    deliverables: ["Orthomosaics", "Alignment profiles", "DSM / DTM and contours"],
+    eyebrow: "See the corridor early",
+    title: "Plan, build and maintain with spatial context.",
+    copy: "RTK- and PPK-enabled corridor mapping captures terrain, structures, utilities and right-of-way conditions for roads, railways, telecoms and pipelines.",
+    outputs: ["Orthomosaics", "Alignment profiles", "DSM, DTM & contours"],
     image: "/assets/highway.jpg",
     icon: Route,
   },
   {
     name: "Land & agriculture",
-    kicker: "Boundaries made defensible.",
-    copy: "Precise boundary mapping, topography and vegetation intelligence help define property, detect encroachment, improve irrigation planning and monitor crop health.",
-    deliverables: ["Boundary maps", "NDVI analysis", "Property data cards"],
+    eyebrow: "Make boundaries defensible",
+    title: "Connect land decisions to accurate evidence.",
+    copy: "Precise boundary mapping, topography and vegetation intelligence support property definition, encroachment detection, irrigation planning and crop-health monitoring.",
+    outputs: ["Boundary maps", "NDVI analysis", "Property data cards"],
     image: "/assets/agriculture.jpg",
     icon: Map,
   },
   {
     name: "Forest & environment",
-    kicker: "Reveal terrain beneath the canopy.",
+    eyebrow: "Reveal hidden terrain",
+    title: "Map complex landscapes beneath the canopy.",
     copy: "LiDAR classification, bare-earth extraction and time-based change detection support forest health, biodiversity, conservation and difficult-terrain mapping.",
-    deliverables: ["Classified point clouds", "Bare-earth models", "Change-detection analysis"],
+    outputs: ["Classified point clouds", "Bare-earth models", "Change analysis"],
     image: "/assets/lidar-forest.jpg",
     icon: Layers3,
   },
   {
     name: "Urban & heritage",
-    kicker: "Digitize what must endure.",
-    copy: "Detailed topographic mapping and structural orthographic surveys give planners and conservation teams spatial context for infrastructure and restoration decisions.",
-    deliverables: ["3D visual models", "Damage annotations", "Risk and maintenance reports"],
+    eyebrow: "Digitise what must endure",
+    title: "Give planners and conservators a measurable record.",
+    copy: "Detailed topographic mapping and structural surveys provide spatial context for urban infrastructure, restoration and long-term maintenance decisions.",
+    outputs: ["3D visual models", "Damage annotations", "Maintenance reports"],
     image: "/assets/heritage.jpg",
     icon: Box,
   },
 ];
 
-const cases = [
+const projects = [
   {
-    code: "IND / 01",
+    code: "01 / MINING",
     title: "JSW Cements",
-    subtitle: "Stockpile intelligence - Toranagallu, Bellary",
+    place: "Toranagallu, Bellary",
     image: "/assets/jsw-stockpile.jpg",
-    scope: "Aerial surveillance and volumetric analysis of cement stockpiles to track quantity and structural-layout changes.",
-    result: "2D, 3D and orthographic maps with volume reports and comparative datasets for inventory and logistics planning.",
+    scope: "Aerial capture and volumetric analysis of cement stockpiles to monitor quantity and structural-layout changes.",
+    result: "2D and 3D models, orthomosaics, volume reports and comparison datasets for inventory and logistics planning.",
   },
   {
-    code: "IND / 02",
+    code: "02 / ENERGY",
     title: "Solar plant portfolio",
-    subtitle: "Multi-state thermal inspection",
+    place: "Multi-state thermal inspection",
     image: "/assets/solar-mapping.jpg",
-    scope: "Boundary, waypoint and thermal mapping across projects in Maharashtra, Odisha, West Bengal and other locations.",
-    result: "High-resolution RGB and thermal datasets for panel performance, cracks, dust, vegetation and installation quality.",
+    scope: "Boundary, waypoint, RGB and thermal mapping across utility-scale solar projects.",
+    result: "Mapped evidence for panel performance, cracks, dust, vegetation and installation quality.",
   },
   {
-    code: "IND / 03",
+    code: "03 / WATER",
     title: "Kaveri river bed",
-    subtitle: "LiDAR point-cloud survey - Madikeri, Karnataka",
+    place: "Madikeri, Karnataka",
     image: "/assets/riverbed.jpg",
-    scope: "Terrain modelling of the river-bed area to support concrete structures, retaining-wall planning and flood-control decisions.",
-    result: "DTM reports, elevation models, orthomosaics and contours for engineering design and overflow analysis.",
+    scope: "LiDAR terrain modelling to support concrete structures, retaining-wall planning and flood-control decisions.",
+    result: "DTM, elevation models, orthomosaics and contours prepared for engineering design and overflow analysis.",
   },
   {
-    code: "IND / 04",
+    code: "04 / RAIL",
     title: "Railway corridor",
-    subtitle: "Infrastructure and encroachment mapping - Mangaluru region",
+    place: "Mangaluru region",
     image: "/assets/railway.jpg",
     scope: "Aerial inspection of track, vegetation, power infrastructure, visible wear and surrounding encroachments.",
-    result: "DSM, DTM, orthomosaic and condition reports for clearance planning and preventive maintenance.",
+    result: "DSM, DTM, orthomosaic and condition reporting for clearance planning and preventive maintenance.",
   },
   {
-    code: "IND / 05",
+    code: "05 / WIND",
     title: "Wind farm development",
-    subtitle: "Pre- and post-construction point cloud",
+    place: "Pre- and post-construction survey",
     image: "/assets/wind-pointcloud.jpg",
     scope: "Topography, foundations, access roads, vegetation and construction progress captured across the asset lifecycle.",
-    result: "Orthomosaic, contour, 3D, inspection and comparison outputs ready for GIS and CAD workflows.",
+    result: "Point clouds, contours, 3D models and comparison outputs ready for GIS and CAD workflows.",
   },
 ];
 
-const outputs = [
-  { icon: Map, title: "Orthomosaic", tag: "GeoTIFF / JPEG", text: "A single, measurable and georeferenced aerial map assembled from high-resolution capture." },
-  { icon: Layers3, title: "DSM + DTM", tag: "Surface / terrain", text: "Elevation intelligence for engineering, drainage, visibility, grade and terrain decisions." },
-  { icon: Box, title: "Point cloud + 3D", tag: "LAS / model", text: "Dense spatial representation for measurement, inspection, classification and digital-twin workflows." },
-  { icon: Route, title: "CAD + GIS", tag: "SHP / KML / DXF", text: "Decision-ready layers that move directly into the systems used by design and planning teams." },
-  { icon: ThermometerSun, title: "Thermal report", tag: "Annotated insight", text: "Visible anomaly evidence paired with location, asset context and maintenance priority." },
-  { icon: Eye, title: "Visual dashboard", tag: "Web analytics", text: "Custom reporting and project views for teams that need faster access to spatial evidence." },
+const deliverables = [
+  [Map, "Orthomosaic", "GeoTIFF / JPEG", "A measurable, georeferenced aerial map assembled from high-resolution capture."],
+  [Layers3, "DSM + DTM", "Surface / terrain", "Elevation intelligence for engineering, drainage, grade and terrain decisions."],
+  [Box, "Point cloud + 3D", "LAS / model", "Dense spatial data for measurement, inspection, classification and digital twins."],
+  [Route, "CAD + GIS", "SHP / KML / DXF", "Decision-ready layers that move into familiar design and planning systems."],
+  [ThermometerSun, "Thermal report", "Annotated insight", "Located anomaly evidence with asset context and maintenance priority."],
+  [Eye, "Visual dashboard", "Web analytics", "Clear project views that make spatial evidence accessible to wider teams."],
 ];
 
-function Logo({ compact = false }) {
+function Brand({ footer = false }) {
   return (
-    <a href="#overview" className={`logo ${compact ? "logoCompact" : ""}`} aria-label="Global Online Solutions home">
-      <span className="logoMark" aria-hidden="true">
-        <svg viewBox="0 0 56 56"><path d="M28 3 49 15v26L28 53 7 41V15L28 3Z"/><path d="M38 19c-3-6-10-9-16-6-8 3-12 11-9 19 3 8 11 12 19 9 4-1 7-4 9-7v-7H28"/><circle cx="44" cy="12" r="3"/></svg>
+    <a className={`brand ${footer ? "brandFooter" : ""}`} href="#top" aria-label="The Atlas Grid home">
+      <Image src="/atlas-grid-mark.svg" alt="" width={48} height={48} priority={!footer} />
+      <span>
+        <strong>THE ATLAS GRID</strong>
+        <small>AERIAL SURVEY &amp; GEOSPATIAL INTELLIGENCE</small>
       </span>
-      <span className="logoWords"><strong>GOS</strong><small>GLOBAL ONLINE SOLUTIONS</small></span>
     </a>
   );
 }
 
-function Header({ present, onPresent }) {
+function Eyebrow({ children, light = false }) {
+  return <p className={`eyebrow ${light ? "eyebrowLight" : ""}`}><span />{children}</p>;
+}
+
+function Header({ onPresent }) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("menuOpen", open);
+    return () => document.body.classList.remove("menuOpen");
+  }, [open]);
+
   return (
-    <header className="siteHeader">
-      <Logo />
-      <nav className={open ? "topNav open" : "topNav"} aria-label="Primary navigation">
-        {sections.slice(1, 6).map(([, label, id]) => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>)}
-        <a href="#brief" className="navCta" onClick={() => setOpen(false)}>Start a brief <ArrowRight size={15}/></a>
+    <header className="header">
+      <Brand />
+      <nav className={open ? "nav navOpen" : "nav"} aria-label="Primary navigation">
+        {navigation.map(([label, id]) => (
+          <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{label}</a>
+        ))}
+        <a className="navBrief" href="#brief" onClick={() => setOpen(false)}>Build a scope <ArrowRight size={17} /></a>
       </nav>
-      <button className="presentButton" onClick={onPresent} aria-label="Toggle presentation mode"><Expand size={16}/><span>{present ? "Exit" : "Present"}</span></button>
-      <button className="menuButton" onClick={() => setOpen(!open)} aria-label="Toggle menu">{open ? <X/> : <Menu/>}</button>
+      <div className="headerActions">
+        <button className="presentButton" onClick={onPresent} aria-label="Toggle presentation view">
+          <Expand size={17} /><span>Present</span>
+        </button>
+        <button className="menuButton" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label="Toggle navigation">
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
     </header>
   );
 }
 
-function Rail({ current }) {
-  return (
-    <aside className="rail" aria-label="Section navigation">
-      <div className="railTrack"><span style={{height: `${(current / (sections.length - 1)) * 100}%`}} /></div>
-      {sections.map(([num, label, id], i) => (
-        <a key={id} href={`#${id}`} className={current === i ? "active" : ""}><span>{num}</span><em>{label}</em></a>
-      ))}
-    </aside>
-  );
-}
-
-function Eyebrow({ children }) { return <div className="eyebrow"><span/>{children}</div>; }
-
 function Hero() {
   return (
-    <section id="overview" className="hero observed" data-index="0">
-      <div className="heroBackdrop"><Image src="/assets/hero-equipment.jpg" alt="Drone survey equipment montage" fill priority sizes="100vw"/></div>
-      <div className="heroGrid" aria-hidden="true" />
-      <div className="heroContent shell">
+    <section className="hero" id="top">
+      <div className="heroTexture" aria-hidden="true" />
+      <div className="shell heroLayout">
         <div className="heroCopy">
-          <Eyebrow>Aerial intelligence from India</Eyebrow>
-          <h1>Survey the<br/><span>unseen.</span></h1>
-          <p>GOS turns aerial capture into precise, decision-ready intelligence for land, infrastructure, energy, mining and the built environment.</p>
+          <Eyebrow>Aerial survey · Geospatial intelligence</Eyebrow>
+          <h1>Map what matters.<br /><em>Decide with clarity.</em></h1>
+          <p className="heroLead">The Atlas Grid combines drone capture, LiDAR, thermal imaging and precise positioning to turn complex sites into decision-ready spatial intelligence.</p>
           <div className="heroActions">
-            <a href="#capabilities" className="primaryButton">Explore capabilities <ArrowDown size={17}/></a>
-            <a href="#evidence" className="textButton">View field evidence <ArrowRight size={17}/></a>
+            <a className="button buttonPrimary" href="#capabilities">Explore capabilities <ArrowDown size={18} /></a>
+            <a className="button buttonGhost" href="#brief">Build a survey scope <ArrowRight size={18} /></a>
+          </div>
+          <div className="heroTrust">
+            <span><Check size={16} /> Mission-specific capture</span>
+            <span><Check size={16} /> Engineering-ready outputs</span>
           </div>
         </div>
-        <div className="heroInstrument" aria-label="Animated aerial survey flight">
-          <div className="aerialWindow">
-            <Image src="/assets/mission-map.jpg" alt="Aerial survey mission map" fill priority sizes="(max-width: 850px) 320px, 430px"/>
-            <div className="aerialShade"/>
-            <svg className="flightRoute" viewBox="0 0 500 420" aria-hidden="true">
-              <path d="M-40 330 C80 250 140 355 238 245 S365 130 550 78"/>
-              <circle cx="67" cy="294" r="5"/>
-              <circle cx="414" cy="118" r="5"/>
-            </svg>
-            <div className="flyingDrone" aria-hidden="true">
-              <svg viewBox="0 0 120 72">
-                <path d="M44 31h32l8 9-11 5H47l-11-5 8-9Z"/>
-                <path d="M43 34 25 21M77 34 95 21M44 43 25 54M76 43 95 54"/>
-                <ellipse cx="19" cy="17" rx="17" ry="4"/><ellipse cx="101" cy="17" rx="17" ry="4"/>
-                <ellipse cx="19" cy="58" rx="17" ry="4"/><ellipse cx="101" cy="58" rx="17" ry="4"/>
-                <circle cx="60" cy="48" r="6"/>
-              </svg>
-              <span className="cameraCone"/>
-            </div>
-            <div className="flightCard top"><span>FLIGHT 02</span><strong>120 m AGL</strong></div>
-            <div className="flightCard bottom"><span>POSITIONING</span><strong><i/> RTK ACTIVE</strong></div>
+
+        <div className="missionVisual" aria-label="Animated drone survey mission">
+          <div className="missionImage">
+            <Image src="/assets/mission-map.jpg" alt="Aerial survey mission map and flight planning view" fill priority sizes="(max-width: 760px) 100vw, 44vw" />
           </div>
-          <p className="flightCaption"><span>Live mission planning</span><b>Precise capture. Defensible data.</b></p>
+          <svg className="missionRoute" viewBox="0 0 600 680" aria-hidden="true">
+            <path d="M-40 570 C120 510 170 590 265 430 S420 220 650 150" />
+            <circle cx="106" cy="532" r="7" />
+            <circle cx="510" cy="204" r="7" />
+          </svg>
+          <div className="drone" aria-hidden="true">
+            <svg viewBox="0 0 120 70">
+              <path d="M43 29h34l8 10-12 6H47l-12-6 8-10Z" />
+              <path d="M43 33 24 20M77 33 96 20M44 43 24 55M76 43 96 55" />
+              <ellipse cx="18" cy="16" rx="16" ry="4" /><ellipse cx="102" cy="16" rx="16" ry="4" />
+              <ellipse cx="18" cy="59" rx="16" ry="4" /><ellipse cx="102" cy="59" rx="16" ry="4" />
+              <circle cx="60" cy="48" r="6" />
+            </svg>
+          </div>
+          <div className="missionCard missionCardTop"><small>MISSION 07</small><strong>RTK ACTIVE</strong><i /></div>
+          <div className="missionCard missionCardBottom"><small>FLIGHT ALTITUDE</small><strong>120 m AGL</strong></div>
+          <div className="mapCoordinates">12.9716° N<br />77.5946° E</div>
         </div>
       </div>
-      <div className="heroMetrics shell">
+      <div className="shell metricStrip">
         <div><strong>cm</strong><span>RTK / PPK positioning</span></div>
         <div><strong>2D + 3D</strong><span>Engineering deliverables</span></div>
-        <div><strong>2000+</strong><span>Acres in land surveys</span></div>
+        <div><strong>2,000+</strong><span>Acres surveyed</span></div>
         <div><strong>12+</strong><span>Industry applications</span></div>
-      </div>
-      <div className="scrollCue"><span>SCROLL TO EXPLORE</span><ArrowDown size={15}/></div>
-    </section>
-  );
-}
-
-function Method() {
-  const steps = [
-    { no: "01", title: "Capture", text: "RGB, thermal, multispectral and LiDAR payloads collect the evidence.", icon: ScanLine },
-    { no: "02", title: "Position", text: "GNSS, RTK, PPK and ground control anchor every observation in space.", icon: Crosshair },
-    { no: "03", title: "Process", text: "Photogrammetry and point-cloud workflows convert raw capture into models.", icon: Orbit },
-    { no: "04", title: "Decide", text: "GIS, CAD, reports and dashboards make the data operational.", icon: Sparkles },
-  ];
-  return (
-    <section id="method" className="section method observed" data-index="1">
-      <div className="shell">
-        <div className="sectionIntro splitIntro">
-          <div><Eyebrow>From flight to foresight</Eyebrow><h2>A precise chain<br/>of <span>evidence.</span></h2></div>
-          <p>Accuracy is designed into the workflow - before take-off, during capture and through every processing step.</p>
-        </div>
-        <div className="methodGrid">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            return <article key={step.no} className="methodCard"><div className="methodIcon"><Icon/></div><span>{step.no}</span><h3>{step.title}</h3><p>{step.text}</p>{i < 3 && <ArrowRight className="methodArrow"/>}</article>;
-          })}
-        </div>
-        <div className="precisionBand">
-          <div className="precisionVisual"><Image src="/assets/mission-map.jpg" alt="Mission planning and pre-processing map" fill sizes="(max-width: 900px) 100vw, 45vw"/><div className="mapReticle"><CircleDot/></div><span className="mapLabel">MISSION / 07<br/><b>PRE-PROCESSING</b></span></div>
-          <div className="precisionCopy"><Eyebrow>Choose the right positioning mode</Eyebrow><div className="mode"><strong>RTK</strong><p>Centimeter-level corrections in real time for live precision and rapid on-site confidence.</p></div><div className="mode"><strong>PPK</strong><p>Post-flight correction for high-accuracy mapping where signal conditions are difficult.</p></div><div className="mode"><strong>GNSS</strong><p>The satellite positioning foundation used for accurate georeferencing and control.</p></div></div>
-        </div>
       </div>
     </section>
   );
 }
 
 function Capabilities() {
-  const items = [
-    [Radio, "Matrice 350 RTK", "Repeatable, high-accuracy missions"],
-    [Layers3, "LiDAR", "Dense point clouds and bare-earth terrain"],
-    [ThermometerSun, "Thermal", "Heat signatures and asset anomalies"],
-    [Eye, "RGB", "High-resolution visual inspection"],
-    [Sparkles, "Multispectral", "Vegetation and crop-health indices"],
-    [Route, "VTOL", "Efficient capture across long corridors"],
+  const capabilities = [
+    [ScanLine, "Drone surveying", "Repeatable aerial capture designed around terrain, accuracy and project scale."],
+    [Layers3, "LiDAR mapping", "Dense point clouds, classified features and bare-earth terrain in complex environments."],
+    [ThermometerSun, "Thermal inspection", "Located heat anomalies for solar assets, power systems and built infrastructure."],
+    [Sparkles, "Multispectral intelligence", "Vegetation indices and crop-health evidence for faster field decisions."],
+    [Crosshair, "RTK / PPK positioning", "Centimetre-grade positioning workflows with appropriate ground control."],
+    [Orbit, "Photogrammetry & GIS", "Orthomosaics, terrain models and spatial layers prepared for operational systems."],
   ];
   return (
-    <section id="capabilities" className="section capabilities observed" data-index="2">
+    <section className="section sectionLight" id="capabilities">
       <div className="shell">
-        <div className="sectionIntro centered"><Eyebrow>Sensor fusion</Eyebrow><h2>One mission. <span>Multiple layers.</span></h2><p>We match platform and payload to the question - not the other way around.</p></div>
-        <div className="capabilityBento">
-          <div className="sensorScene">
-            <Image src="/assets/dji-terra.jpg" alt="Processed aerial survey model in DJI Terra" fill sizes="(max-width: 900px) 100vw, 55vw"/>
-            <div className="sceneHud"><span>POINT CLOUD DENSITY</span><b>HIGH</b></div>
-            <div className="sceneLegend"><i/><span>Ground</span><i/><span>Structure</span><i/><span>Vegetation</span></div>
-          </div>
-          <div className="sensorList">
-            {items.map(([Icon, title, text], i) => <div className="sensorItem" key={title}><span className="sensorNo">0{i+1}</span><Icon/><div><strong>{title}</strong><p>{text}</p></div></div>)}
-          </div>
+        <div className="sectionHeading">
+          <div><Eyebrow>Integrated capability</Eyebrow><h2>From aerial capture<br />to <em>usable intelligence.</em></h2></div>
+          <p>Platform, payload and processing are chosen around the decision—not around a fixed technology stack.</p>
+        </div>
+        <div className="capabilityGrid">
+          {capabilities.map(([Icon, title, text], index) => (
+            <article className="capabilityCard" key={title}>
+              <div className="capabilityTop"><Icon /><span>0{index + 1}</span></div>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <span className="cardLine" />
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -293,17 +277,27 @@ function Sectors() {
   const item = sectors[active];
   const Icon = item.icon;
   return (
-    <section id="sectors" className="section sectors observed" data-index="3">
+    <section className="section sectorSection" id="sectors">
       <div className="shell">
-        <div className="sectionIntro splitIntro"><div><Eyebrow>Sector intelligence</Eyebrow><h2>Built for the<br/><span>real world.</span></h2></div><p>Explore how the same geospatial foundation is tailored to different operational questions.</p></div>
-        <div className="sectorExplorer">
-          <div className="sectorTabs" role="tablist" aria-label="Survey sectors">
-            {sectors.map((sector, i) => <button key={sector.name} role="tab" aria-selected={active === i} onClick={() => setActive(i)}><span>0{i+1}</span>{sector.name}<ArrowRight size={16}/></button>)}
-          </div>
-          <div className="sectorStage" key={item.name}>
-            <Image src={item.image} alt={`${item.name} survey field evidence`} fill sizes="(max-width: 900px) 100vw, 60vw"/>
-            <div className="sectorShade"/>
-            <div className="sectorContent"><div className="sectorIcon"><Icon/></div><span>APPLICATION / 0{active+1}</span><h3>{item.kicker}</h3><p>{item.copy}</p><ul>{item.deliverables.map(x => <li key={x}><Check size={14}/>{x}</li>)}</ul></div>
+        <div className="sectionHeading sectionHeadingLight">
+          <div><Eyebrow light>Sector intelligence</Eyebrow><h2>One spatial foundation.<br /><em>Many critical decisions.</em></h2></div>
+          <p>Choose a sector to see how the survey method and outputs adapt to the operational question.</p>
+        </div>
+        <div className="sectorTabs" role="tablist" aria-label="Industry sectors">
+          {sectors.map((sector, index) => (
+            <button key={sector.name} role="tab" aria-selected={active === index} onClick={() => setActive(index)}>
+              <span>0{index + 1}</span>{sector.name}
+            </button>
+          ))}
+        </div>
+        <div className="sectorPanel" key={item.name}>
+          <div className="sectorImage"><Image src={item.image} alt={`${item.name} aerial survey`} fill sizes="(max-width: 760px) 100vw, 55vw" /></div>
+          <div className="sectorCopy">
+            <Icon />
+            <span>{item.eyebrow}</span>
+            <h3>{item.title}</h3>
+            <p>{item.copy}</p>
+            <ul>{item.outputs.map((output) => <li key={output}><Check size={16} />{output}</li>)}</ul>
           </div>
         </div>
       </div>
@@ -311,32 +305,112 @@ function Sectors() {
   );
 }
 
-function Evidence() {
-  const [active, setActive] = useState(0);
-  const item = cases[active];
-  const next = (d) => setActive((active + d + cases.length) % cases.length);
+function Approach() {
+  const steps = [
+    [ScanLine, "Capture", "RGB, thermal, multispectral or LiDAR payloads collect the evidence."],
+    [Crosshair, "Position", "GNSS, RTK, PPK and control points anchor every observation."],
+    [Orbit, "Process", "Photogrammetry and point-cloud workflows build accurate spatial models."],
+    [Sparkles, "Decide", "GIS, CAD, reports and dashboards make the evidence operational."],
+  ];
   return (
-    <section id="evidence" className="section evidence observed" data-index="4">
+    <section className="section approachSection" id="approach">
       <div className="shell">
-        <div className="sectionIntro splitIntro"><div><Eyebrow>Selected experience</Eyebrow><h2>Field work.<br/><span>Made visible.</span></h2></div><div className="caseControls"><button onClick={() => next(-1)} aria-label="Previous case"><ChevronLeft/></button><span>{String(active+1).padStart(2,"0")} / {String(cases.length).padStart(2,"0")}</span><button onClick={() => next(1)} aria-label="Next case"><ChevronRight/></button></div></div>
-        <div className="caseStage" key={item.title}>
-          <div className="caseImage"><Image src={item.image} alt={`${item.title} project`} fill sizes="(max-width: 900px) 100vw, 60vw"/><span className="caseCode">{item.code}</span><span className="imageScan"/></div>
-          <article className="caseDetail"><span>PROJECT EVIDENCE</span><h3>{item.title}</h3><h4>{item.subtitle}</h4><div><small>SCOPE</small><p>{item.scope}</p></div><div><small>OUTPUT</small><p>{item.result}</p></div><div className="caseTags"><i>Survey</i><i>Geospatial</i><i>Decision data</i></div></article>
+        <div className="sectionHeading">
+          <div><Eyebrow>From flight to foresight</Eyebrow><h2>A precise chain<br />of <em>evidence.</em></h2></div>
+          <p>Accuracy is designed into the workflow before take-off, during capture and through every processing step.</p>
         </div>
-        <div className="caseDots">{cases.map((c,i) => <button key={c.title} className={active===i?"active":""} onClick={() => setActive(i)} aria-label={`View ${c.title}`}><span/></button>)}</div>
+        <div className="approachGrid">
+          {steps.map(([Icon, title, text], index) => (
+            <article key={title}>
+              <div><span>0{index + 1}</span><Icon /></div>
+              <h3>{title}</h3><p>{text}</p>
+              {index < steps.length - 1 && <ArrowRight className="stepArrow" />}
+            </article>
+          ))}
+        </div>
+        <div className="positioningBand">
+          <div className="positioningImage">
+            <Image src="/assets/dji-terra.jpg" alt="Processed drone survey point cloud" fill sizes="(max-width: 760px) 100vw, 48vw" />
+            <span><Radio size={15} /> POSITIONING WORKFLOW / ACTIVE</span>
+          </div>
+          <div className="positioningCopy">
+            <Eyebrow light>Accuracy matched to purpose</Eyebrow>
+            <div><strong>RTK</strong><p>Real-time corrections for rapid field confidence and precise capture.</p></div>
+            <div><strong>PPK</strong><p>Post-flight corrections when signal conditions or mission design demand flexibility.</p></div>
+            <div><strong>GNSS</strong><p>The positioning foundation for control, georeferencing and defensible outputs.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Projects() {
+  const [active, setActive] = useState(0);
+  const touchStart = useRef(null);
+  const item = projects[active];
+  const move = (direction) => setActive((active + direction + projects.length) % projects.length);
+
+  return (
+    <section className="section projectsSection" id="projects">
+      <div className="shell">
+        <div className="sectionHeading sectionHeadingLight">
+          <div><Eyebrow light>Selected experience</Eyebrow><h2>Field work.<br /><em>Made visible.</em></h2></div>
+          <div className="projectControls">
+            <button onClick={() => move(-1)} aria-label="Previous project"><ChevronLeft /></button>
+            <span>{String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
+            <button onClick={() => move(1)} aria-label="Next project"><ChevronRight /></button>
+          </div>
+        </div>
+        <div
+          className="projectStage"
+          key={item.title}
+          onTouchStart={(event) => { touchStart.current = event.changedTouches[0].clientX; }}
+          onTouchEnd={(event) => {
+            const delta = touchStart.current - event.changedTouches[0].clientX;
+            if (Math.abs(delta) > 45) move(delta > 0 ? 1 : -1);
+          }}
+        >
+          <div className="projectImage">
+            <Image src={item.image} alt={`${item.title} survey project`} fill sizes="(max-width: 760px) 100vw, 58vw" />
+            <span>{item.code}</span>
+          </div>
+          <article className="projectCopy">
+            <small>PROJECT EVIDENCE</small>
+            <h3>{item.title}</h3><h4>{item.place}</h4>
+            <div><strong>Scope</strong><p>{item.scope}</p></div>
+            <div><strong>Output</strong><p>{item.result}</p></div>
+          </article>
+        </div>
+        <div className="projectDots">
+          {projects.map((project, index) => <button key={project.title} className={active === index ? "active" : ""} onClick={() => setActive(index)} aria-label={`View ${project.title}`}><span /></button>)}
+        </div>
+        <p className="swipeHint">Swipe the project card to explore more field experience.</p>
       </div>
     </section>
   );
 }
 
 function Deliverables() {
-  const software = ["DJI Terra", "Pix4D", "DroneDeploy", "Mission Planner", "Metashape", "WebODM", "QGIS", "Global Mapper", "AutoCAD 3D", "Trimble Business Center", "CloudCompare", "OpenDroneMap"];
   return (
-    <section id="deliverables" className="section deliverables observed" data-index="5">
+    <section className="section deliverablesSection" id="deliverables">
       <div className="shell">
-        <div className="sectionIntro centered"><Eyebrow>Outputs engineered for action</Eyebrow><h2>Data your team<br/><span>can actually use.</span></h2><p>From raw spatial evidence to familiar engineering formats, visual reports and live decision surfaces.</p></div>
-        <div className="outputGrid">{outputs.map((item, i) => { const Icon=item.icon; return <article key={item.title}><div className="outputTop"><Icon/><span>0{i+1}</span></div><small>{item.tag}</small><h3>{item.title}</h3><p>{item.text}</p><ArrowRight className="outputArrow"/></article>})}</div>
-        <div className="softwareBand"><span>POST-PROCESSING ECOSYSTEM</span><div className="softwareMarquee"><div>{[...software, ...software].map((x,i)=><i key={`${x}-${i}`}>{x}</i>)}</div></div></div>
+        <div className="sectionHeading">
+          <div><Eyebrow>Outputs engineered for action</Eyebrow><h2>Data your team<br /><em>can actually use.</em></h2></div>
+          <p>Spatial evidence prepared for familiar engineering, design, planning and decision workflows.</p>
+        </div>
+        <div className="deliverableGrid">
+          {deliverables.map(([Icon, title, tag, text], index) => (
+            <article key={title}>
+              <div><Icon /><span>0{index + 1}</span></div>
+              <small>{tag}</small><h3>{title}</h3><p>{text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="softwareBand">
+          <span>WORKFLOW COMPATIBILITY</span>
+          <div>{["DJI Terra", "Pix4D", "Metashape", "QGIS", "AutoCAD", "Global Mapper", "CloudCompare"].map((item) => <b key={item}>{item}</b>)}</div>
+        </div>
       </div>
     </section>
   );
@@ -344,85 +418,105 @@ function Deliverables() {
 
 function BriefBuilder() {
   const [sector, setSector] = useState("Renewable energy");
-  const [area, setArea] = useState("Single site");
+  const [scale, setScale] = useState("Single site");
   const [goal, setGoal] = useState("Inspection & condition");
   const [copied, setCopied] = useState(false);
-  const brief = useMemo(() => `GOS SURVEY BRIEF\nSector: ${sector}\nProject scale: ${area}\nPrimary goal: ${goal}\n\nPlease recommend the capture method, positioning workflow, deliverables, schedule and field requirements.`, [sector, area, goal]);
-  async function copyBrief() { await navigator.clipboard.writeText(brief); setCopied(true); setTimeout(()=>setCopied(false), 1800); }
+  const brief = useMemo(() => `THE ATLAS GRID — SURVEY SCOPE\nSector: ${sector}\nProject scale: ${scale}\nPrimary goal: ${goal}\n\nPlease recommend the capture method, positioning workflow, field requirements, deliverables and indicative schedule.`, [sector, scale, goal]);
+
+  async function copyBrief() {
+    await navigator.clipboard.writeText(brief);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  }
+
   return (
-    <section id="brief" className="section brief observed" data-index="6">
-      <div className="briefGlow"/>
-      <div className="shell">
-        <div className="briefLayout">
-          <div className="briefCopy"><Eyebrow>Start with the question</Eyebrow><h2>What do you<br/>need to <span>know?</span></h2><p>Define the mission in three steps. GOS can then shape the sensor, accuracy, flight plan, processing path and final outputs around the decision you need to make.</p><div className="contactLine"><span><Radio size={16}/> GLOBAL ONLINE SOLUTIONS</span><small>Aerial survey / geospatial intelligence / decision systems</small></div></div>
-          <div className="briefBuilder">
-            <div className="builderHeader"><span>MISSION CONFIGURATOR</span><i><b/>ONLINE</i></div>
-            <label><span>01 / SECTOR</span><select value={sector} onChange={e=>setSector(e.target.value)}>{sectors.map(x=><option key={x.name}>{x.name}</option>)}</select></label>
-            <label><span>02 / PROJECT SCALE</span><div className="segmented">{["Single site", "Multi-site", "Long corridor"].map(x=><button key={x} onClick={()=>setArea(x)} className={area===x?"active":""}>{x}</button>)}</div></label>
-            <label><span>03 / PRIMARY GOAL</span><select value={goal} onChange={e=>setGoal(e.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Boundary & ownership</option><option>Environmental monitoring</option></select></label>
-            <div className="briefPreview"><small>GENERATED BRIEF</small><p>{sector} / {area} / {goal}</p></div>
-            <button className="copyButton" onClick={copyBrief}>{copied ? <><Check/> Copied to clipboard</> : <><Clipboard/> Copy survey brief</>}</button>
-          </div>
+    <section className="section briefSection" id="brief">
+      <div className="briefGrid" aria-hidden="true" />
+      <div className="shell briefLayout">
+        <div>
+          <Eyebrow light>Shape the mission</Eyebrow>
+          <h2>Start with the<br /><em>decision.</em></h2>
+          <p>Define the project in three quick steps. The Atlas Grid can then shape the sensor, accuracy, flight plan, processing path and outputs around what your team needs to know.</p>
+          <div className="briefNote"><Radio size={18} /><span><strong>THE ATLAS GRID</strong>Drone survey · LiDAR · Thermal · GIS</span></div>
         </div>
-        <footer><Logo compact/><div><a href="#overview">Back to top <ArrowDown size={14}/></a><span>© {new Date().getFullYear()} Global Online Solutions</span></div></footer>
+        <div className="builder">
+          <div className="builderHeader"><span>SURVEY SCOPE BUILDER</span><i><b /> READY</i></div>
+          <label>
+            <span>01 / SECTOR</span>
+            <select value={sector} onChange={(event) => setSector(event.target.value)}>{sectors.map((item) => <option key={item.name}>{item.name}</option>)}</select>
+          </label>
+          <fieldset>
+            <legend>02 / PROJECT SCALE</legend>
+            <div className="segments">{["Single site", "Multi-site", "Long corridor"].map((item) => <button type="button" key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div>
+          </fieldset>
+          <label>
+            <span>03 / PRIMARY GOAL</span>
+            <select value={goal} onChange={(event) => setGoal(event.target.value)}>
+              <option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Boundary & ownership</option><option>Environmental monitoring</option>
+            </select>
+          </label>
+          <div className="briefPreview"><small>YOUR OUTLINE</small><p>{sector} · {scale} · {goal}</p></div>
+          <button className="copyButton" onClick={copyBrief}>{copied ? <><Check /> Copied to clipboard</> : <><Clipboard /> Copy scope outline</>}</button>
+          <p className="privacyNote">Nothing is submitted. This tool only prepares a brief you can copy and share.</p>
+        </div>
       </div>
+      <footer className="shell footer">
+        <Brand footer />
+        <div><a href="#top">Back to top <ArrowDown size={15} /></a><span>© {new Date().getFullYear()} The Atlas Grid</span><span>theatlasgrid.com</span></div>
+      </footer>
     </section>
   );
 }
 
 export default function Home() {
-  const [current, setCurrent] = useState(0);
-  const [present, setPresent] = useState(false);
-  const observerRef = useRef(null);
+  const [presenting, setPresenting] = useState(false);
 
   useEffect(() => {
-    const nodes = document.querySelectorAll(".observed");
-    observerRef.current = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-          setCurrent(Number(entry.target.dataset.index));
-        }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add("revealed");
       });
-    }, { threshold: 0.35 });
-    nodes.forEach(node => observerRef.current.observe(node));
-    return () => observerRef.current?.disconnect();
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".sectionHeading, .capabilityGrid, .sectorPanel, .approachGrid, .positioningBand, .projectStage, .deliverableGrid, .briefLayout").forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    function onFull() { const is = Boolean(document.fullscreenElement); setPresent(is); document.body.classList.toggle("presenting", is); }
-    document.addEventListener("fullscreenchange", onFull);
-    return () => document.removeEventListener("fullscreenchange", onFull);
-  }, []);
-
-  useEffect(() => {
-    function onKey(e) {
-      if (!present || !["ArrowDown","ArrowRight","ArrowUp","ArrowLeft"].includes(e.key)) return;
-      e.preventDefault();
-      const direction = ["ArrowDown","ArrowRight"].includes(e.key) ? 1 : -1;
-      const index = Math.max(0, Math.min(sections.length-1, current + direction));
-      document.getElementById(sections[index][2])?.scrollIntoView({behavior:"smooth"});
-    }
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [present, current]);
+    document.body.classList.toggle("presenting", presenting);
+    return () => document.body.classList.remove("presenting");
+  }, [presenting]);
 
   async function togglePresent() {
-    if (!document.fullscreenElement) await document.documentElement.requestFullscreen?.();
-    else await document.exitFullscreen?.();
+    if (document.fullscreenEnabled) {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        setPresenting(true);
+      } else {
+        await document.exitFullscreen();
+        setPresenting(false);
+      }
+    } else {
+      setPresenting((value) => !value);
+    }
   }
+
+  useEffect(() => {
+    const sync = () => setPresenting(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", sync);
+    return () => document.removeEventListener("fullscreenchange", sync);
+  }, []);
 
   return (
     <main>
-      <Header present={present} onPresent={togglePresent}/>
-      <Rail current={current}/>
-      <Hero/>
-      <Method/>
-      <Capabilities/>
-      <Sectors/>
-      <Evidence/>
-      <Deliverables/>
-      <BriefBuilder/>
+      <Header onPresent={togglePresent} />
+      <Hero />
+      <Capabilities />
+      <Sectors />
+      <Approach />
+      <Projects />
+      <Deliverables />
+      <BriefBuilder />
+      <a className="mobileBrief" href="#brief">Build a survey scope <ArrowRight size={17} /></a>
     </main>
   );
 }

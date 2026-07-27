@@ -1,6 +1,6 @@
-# GOS Aerial Intelligence
+# The Atlas Grid
 
-Interactive capability presentation for Global Online Solutions (GOS), based on the supplied survey services and detailed scope document.
+Mobile-first interactive presentation for The Atlas Grid, based on the supplied survey services and detailed scope document.
 
 ## Run locally
 

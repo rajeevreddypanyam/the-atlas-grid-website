@@ -1,0 +1,10 @@
+<svg width="520" height="104" viewBox="0 0 520 104" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="96" height="96" rx="24" fill="#143A43"/>
+  <path d="M30 20H20V30M74 20H84V30M30 84H20V74M74 84H84V74" stroke="#D18445" stroke-width="3.5" stroke-linecap="round"/>
+  <circle cx="52" cy="52" r="24" stroke="#F7F1E7" stroke-width="2.4"/>
+  <path d="M28 52H76M52 28C42 38 42 66 52 76M52 28C62 38 62 66 52 76" stroke="#8EB0B3" stroke-width="1.8"/>
+  <path d="M39 65L52 36L65 65M44 55H60" stroke="#F7F1E7" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="75" cy="29" r="5" fill="#D18445"/>
+  <text x="126" y="52" fill="#143A43" font-family="Arial, Helvetica, sans-serif" font-size="35" font-weight="800" letter-spacing="2.8">THE ATLAS GRID</text>
+  <text x="128" y="78" fill="#657B80" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" letter-spacing="2.2">AERIAL SURVEY &amp; GEOSPATIAL INTELLIGENCE</text>
+</svg>
