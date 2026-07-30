@@ -7,7 +7,6 @@ import {
   Box,
   Check,
   ChevronRight,
-  Clipboard,
   Crosshair,
   Eye,
   Layers3,
@@ -16,6 +15,7 @@ import {
   Mountain,
   Radio,
   ScanLine,
+  Send,
   ThermometerSun,
   X,
   Zap,
@@ -97,7 +97,6 @@ export default function Home() {
   const [compare, setCompare] = useState(52);
   const [scale, setScale] = useState("Single site");
   const [goal, setGoal] = useState("Inspection & condition");
-  const [copied, setCopied] = useState(false);
   const sector = sectors[sectorIndex];
 
   const scope = useMemo(
@@ -113,12 +112,6 @@ export default function Home() {
     document.querySelectorAll("[data-reveal]").forEach((node) => reveal.observe(node));
     return () => reveal.disconnect();
   }, []);
-
-  const copyScope = async () => {
-    await navigator.clipboard.writeText(`The Atlas Grid survey brief: ${scope}`);
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
-  };
 
   return (
     <main>
@@ -278,18 +271,35 @@ export default function Home() {
       <section className="brief-section" id="brief">
         <div className="brief-copy" data-reveal>
           <p className="kicker"><i /> SHAPE THE MISSION</p>
-          <h2>Build your<br />project brief.</h2>
-          <p>Use this quick planner to tell us what you need surveyed. Choose three options, then copy the summary to share with our team.</p>
+          <h2>Submit your<br />project brief.</h2>
+          <p>Use this quick planner to tell us what you need surveyed. Your choices and contact details will be sent directly to our team.</p>
           <a href="mailto:hello@theatlasgrid.com">hello@theatlasgrid.com <ArrowRight size={18} /></a>
         </div>
-        <div className="scope-builder">
+        <form className="scope-builder" action="https://formsubmit.co/hello@theatlasgrid.com" method="POST">
+          <input type="hidden" name="_cc" value="rajeev@neoglobalindustries.com" />
+          <input type="hidden" name="_subject" value="New Atlas Grid project brief" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="https://gos-aerial-intelligence.ihatemuzik.chatgpt.site/#brief" />
+          <input type="text" name="_honey" className="form-honey" tabIndex={-1} autoComplete="off" />
+          <input type="hidden" name="Mission outline" value={scope} />
+          <input type="hidden" name="Selected sector" value={sector.name} />
+          <input type="hidden" name="Project scale" value={scale} />
+          <input type="hidden" name="Primary goal" value={goal} />
           <div className="builder-status"><span>SURVEY SCOPE / LIVE</span><b><i /> READY</b></div>
-          <fieldset><legend>01 / SECTOR</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
-          <fieldset><legend>02 / PROJECT SCALE</legend><div className="choice-grid three">{["Single site", "Multi-site", "Long corridor"].map((item) => <button key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div></fieldset>
+          <fieldset><legend>01 / SECTOR</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
+          <fieldset><legend>02 / PROJECT SCALE</legend><div className="choice-grid three">{["Single site", "Multi-site", "Long corridor"].map((item) => <button type="button" key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div></fieldset>
           <label><span>03 / PRIMARY GOAL</span><select value={goal} onChange={(event) => setGoal(event.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Environmental monitoring</option></select></label>
+          <div className="contact-grid">
+            <label><span>04 / YOUR NAME</span><input name="Name" type="text" placeholder="Your name" required /></label>
+            <label><span>05 / EMAIL</span><input name="email" type="email" placeholder="name@company.com" required /></label>
+            <label><span>06 / PHONE</span><input name="Phone" type="tel" placeholder="+91 phone number" /></label>
+            <label><span>07 / COMPANY</span><input name="Company" type="text" placeholder="Company / project name" /></label>
+          </div>
+          <label><span>08 / PROJECT NOTES</span><textarea name="Project notes" placeholder="Location, approximate area, timeline, or anything important" rows={4} /></label>
           <div className="scope-output"><small>YOUR MISSION OUTLINE</small><p>{scope}</p></div>
-          <button className="copy-scope" onClick={copyScope}>{copied ? <Check /> : <Clipboard />}{copied ? "Copied to clipboard" : "Copy mission brief"}</button>
-        </div>
+          <button className="copy-scope" type="submit"><Send />Submit mission enquiry</button>
+        </form>
       </section>
 
       <footer>
