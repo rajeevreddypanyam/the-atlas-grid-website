@@ -3,6 +3,7 @@
 import {
   ArrowDown,
   ArrowRight,
+  ArrowUp,
   Box,
   Check,
   ChevronRight,
@@ -277,8 +278,8 @@ export default function Home() {
       <section className="brief-section" id="brief">
         <div className="brief-copy" data-reveal>
           <p className="kicker"><i /> SHAPE THE MISSION</p>
-          <h2>Start with<br />the decision.</h2>
-          <p>Three choices create a clear first brief. We shape the platform, sensor, accuracy and deliverables around it.</p>
+          <h2>Build your<br />project brief.</h2>
+          <p>Use this quick planner to tell us what you need surveyed. Choose three options, then copy the summary to share with our team.</p>
           <a href="mailto:hello@theatlasgrid.com">hello@theatlasgrid.com <ArrowRight size={18} /></a>
         </div>
         <div className="scope-builder">
@@ -294,7 +295,7 @@ export default function Home() {
       <footer>
         <a className="brand footer-brand" href="#top"><img src="/atlas-grid-mark.svg" alt="" /><span><strong>THE ATLAS GRID</strong><small>AERIAL INTELLIGENCE</small></span></a>
         <p>Map what matters. Decide with clarity.</p>
-        <div><span>© 2026 GLOBAL ONLINE SOLUTIONS</span><a href="#top">BACK TO TOP <ArrowRight size={15} /></a></div>
+        <div><span>&copy; 2026 THE ATLAS GRID SOLUTIONS PVT LTD</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
       </footer>
     </main>
   );
