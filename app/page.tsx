@@ -275,8 +275,8 @@ export default function Home() {
           <p>Use this quick planner to tell us what you need surveyed. Your choices and contact details will be sent directly to our team.</p>
           <a href="mailto:hello@theatlasgrid.com">hello@theatlasgrid.com <ArrowRight size={18} /></a>
         </div>
-        <form className="scope-builder" action="https://formsubmit.co/hello@theatlasgrid.com" method="POST">
-          <input type="hidden" name="_cc" value="rajeev@neoglobalindustries.com" />
+        <form className="scope-builder" action="https://formsubmit.co/rajeev@neoglobalindustries.com" method="POST">
+          <input type="hidden" name="_cc" value="hello@theatlasgrid.com" />
           <input type="hidden" name="_subject" value="New Atlas Grid project brief" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
