@@ -11,15 +11,35 @@ import {
   Eye,
   Layers3,
   Map,
+  MapPinned,
   Menu,
   Mountain,
+  Radar,
   ScanLine,
   Send,
   ThermometerSun,
   X,
   Zap,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type SVGProps } from "react";
+
+function DroneMark(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <circle cx="6.2" cy="6.2" r="1.9" />
+      <circle cx="17.8" cy="6.2" r="1.9" />
+      <circle cx="6.2" cy="17.8" r="1.9" />
+      <circle cx="17.8" cy="17.8" r="1.9" />
+      <path d="M7.7 7.7 10 10" />
+      <path d="M16.3 7.7 14 10" />
+      <path d="M7.7 16.3 10 14" />
+      <path d="M16.3 16.3 14 14" />
+      <path d="M8.5 12h7" />
+      <path d="M12 8.5v7" />
+      <path d="M10.2 10.2h3.6v3.6h-3.6z" />
+    </svg>
+  );
+}
 
 const sectors = [
   {
@@ -82,12 +102,12 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: ScanLine, supportIcon: "/brand/support-aerial-insights.png", number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
-  { icon: Layers3, supportIcon: "/brand/support-spatial-intelligence.png", number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
-  { icon: ThermometerSun, supportIcon: "/brand/support-global-impact.png", number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
-  { icon: Crosshair, supportIcon: "/brand/support-precision.png", number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
+  { icon: DroneMark, number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
+  { icon: Radar, number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
+  { icon: ThermometerSun, number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
+  { icon: Crosshair, number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
   { icon: Mountain, number: "05", name: "Photogrammetry", text: "Orthomosaics, terrain models and spatial layers engineered for use." },
-  { icon: Map, number: "06", name: "GIS intelligence", text: "Clear analysis that moves directly into operational decision systems." },
+  { icon: MapPinned, number: "06", name: "GIS intelligence", text: "Clear analysis that moves directly into operational decision systems." },
 ];
 
 export default function Home() {
@@ -177,10 +197,10 @@ export default function Home() {
           <p>We engineer the entire chain from field evidence to a decision your team can defend.</p>
         </div>
         <div className="capability-list">
-          {capabilities.map(({ icon: Icon, supportIcon, number, name, text }) => (
+          {capabilities.map(({ icon: Icon, number, name, text }) => (
             <article key={name} data-reveal>
               <span className="cap-number">{number}</span>
-              {supportIcon ? <img className="support-icon" src={supportIcon} alt="" /> : <Icon aria-hidden="true" />}
+              <Icon aria-hidden="true" />
               <h3>{name}</h3>
               <p>{text}</p>
               <ChevronRight className="cap-arrow" aria-hidden="true" />
