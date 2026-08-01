@@ -1,12 +1,13 @@
-# The Atlas Grid Website
+# TAGS Website
 
-The editable source for **The Atlas Grid**, a premium interactive aerial survey and geospatial intelligence website for Global Online Solutions.
+The editable source for **TAGS - The Atlas Grid Solutions Private Limited**, a premium interactive geospatial intelligence website.
 
 Live site:  
 https://gos-aerial-intelligence.ihatemuzik.chatgpt.site/
 
 ## Design
 
+- Official TAGS logo and brand palette
 - Full-screen aerial mission experience
 - Interactive RGB and thermal comparison
 - Sector-specific survey stories

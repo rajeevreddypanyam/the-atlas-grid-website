@@ -82,10 +82,10 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: ScanLine, number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
-  { icon: Layers3, number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
-  { icon: ThermometerSun, number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
-  { icon: Crosshair, number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
+  { icon: ScanLine, supportIcon: "/brand/support-aerial-insights.png", number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
+  { icon: Layers3, supportIcon: "/brand/support-spatial-intelligence.png", number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
+  { icon: ThermometerSun, supportIcon: "/brand/support-global-impact.png", number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
+  { icon: Crosshair, supportIcon: "/brand/support-precision.png", number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
   { icon: Mountain, number: "05", name: "Photogrammetry", text: "Orthomosaics, terrain models and spatial layers engineered for use." },
   { icon: Map, number: "06", name: "GIS intelligence", text: "Clear analysis that moves directly into operational decision systems." },
 ];
@@ -115,9 +115,8 @@ export default function Home() {
   return (
     <main>
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="The Atlas Grid home">
-          <img src="/atlas-grid-mark.svg" alt="" />
-          <span><strong>THE ATLAS GRID</strong><small>AERIAL INTELLIGENCE</small></span>
+        <a className="brand" href="#top" aria-label="TAGS home">
+          <img src="/brand/tags-logo-white.png" alt="TAGS" />
         </a>
         <nav className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
           <a href="#capabilities" onClick={() => setMenuOpen(false)}>Capabilities</a>
@@ -135,9 +134,9 @@ export default function Home() {
         <img className="hero-image" src="/assets/hero-aerial-v2.jpg" alt="Drone surveying an infrastructure corridor at blue hour" />
         <div className="hero-shade" />
         <div className="hero-content">
-          <p className="kicker"><i /> GLOBAL ONLINE SOLUTIONS · INDIA</p>
-          <h1>THE ATLAS<br /><span>GRID</span></h1>
-          <p className="hero-statement">Aerial intelligence for decisions<br />that cannot wait.</p>
+          <p className="kicker"><i /> THE ATLAS GRID SOLUTIONS PRIVATE LIMITED</p>
+          <h1>TAGS</h1>
+          <p className="hero-statement">Geospatial Intelligence<br />from Ground to Sky.</p>
           <div className="hero-actions">
             <a className="button primary" href="#sectors">Enter the mission <ArrowDown size={18} /></a>
             <a className="text-link" href="#work">View fieldwork <ArrowRight size={18} /></a>
@@ -160,10 +159,10 @@ export default function Home() {
           <p>We engineer the entire chain from field evidence to a decision your team can defend.</p>
         </div>
         <div className="capability-list">
-          {capabilities.map(({ icon: Icon, number, name, text }) => (
+          {capabilities.map(({ icon: Icon, supportIcon, number, name, text }) => (
             <article key={name} data-reveal>
               <span className="cap-number">{number}</span>
-              <Icon aria-hidden="true" />
+              {supportIcon ? <img className="support-icon" src={supportIcon} alt="" /> : <Icon aria-hidden="true" />}
               <h3>{name}</h3>
               <p>{text}</p>
               <ChevronRight className="cap-arrow" aria-hidden="true" />
@@ -266,7 +265,7 @@ export default function Home() {
         </div>
         <form className="scope-builder" action="https://formsubmit.co/rajeev@neoglobalindustries.com" method="POST">
           <input type="hidden" name="_cc" value="hello@theatlasgrid.com" />
-          <input type="hidden" name="_subject" value="New Atlas Grid project brief" />
+          <input type="hidden" name="_subject" value="New TAGS project brief" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="https://gos-aerial-intelligence.ihatemuzik.chatgpt.site/#brief" />
@@ -292,9 +291,9 @@ export default function Home() {
       </section>
 
       <footer>
-        <a className="brand footer-brand" href="#top"><img src="/atlas-grid-mark.svg" alt="" /><span><strong>THE ATLAS GRID</strong><small>AERIAL INTELLIGENCE</small></span></a>
-        <p>Map what matters. Decide with clarity.</p>
-        <div><span>&copy; 2026 THE ATLAS GRID SOLUTIONS PVT LTD</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
+        <a className="brand footer-brand" href="#top" aria-label="TAGS home"><img src="/brand/tags-logo-white.png" alt="TAGS" /></a>
+        <p>Geospatial Intelligence from Ground to Sky.</p>
+        <div><span>&copy; 2026 TAGS - THE ATLAS GRID SOLUTIONS PRIVATE LIMITED</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
       </footer>
     </main>
   );

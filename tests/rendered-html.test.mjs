@@ -13,16 +13,17 @@ async function render() {
   );
 }
 
-test("server-renders The Atlas Grid experience", async () => {
+test("server-renders TAGS experience", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>The Atlas Grid \| Aerial Intelligence<\/title>/i);
-  assert.match(html, /THE ATLAS GRID/);
-  assert.match(html, /Aerial intelligence for decisions/);
+  assert.match(html, /<title>TAGS \| Geospatial Intelligence<\/title>/i);
+  assert.match(html, /TAGS/);
+  assert.match(html, /Geospatial Intelligence from Ground to Sky/);
   assert.match(html, /SURVEY SCOPE/);
+  assert.match(html, /tags-logo-white\.png/);
   assert.match(html, /hero-aerial-v2\.jpg/);
   assert.match(html, /solar-rgb-v2\.jpg/);
   assert.match(html, /solar-thermal-v2\.jpg/);
