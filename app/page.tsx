@@ -28,7 +28,7 @@ const sectors = [
     tag: "THERMAL INTELLIGENCE",
     title: "Find the fault before it becomes the failure.",
     text: "Portfolio-scale RGB and thermal inspection turns every anomaly into a located, ranked maintenance action.",
-    image: "/assets/thermal-panels.jpg",
+    image: "/assets/solar-thermal-v2.jpg",
     stat: "100%",
     statLabel: "asset coverage",
     outputs: ["Thermal anomaly map", "Panel-level defect log", "Condition report"],
@@ -38,7 +38,7 @@ const sectors = [
     tag: "VOLUME & PROGRESS",
     title: "Measure every movement. Reconcile every tonne.",
     text: "Repeatable aerial surveys make stockpiles, cut-and-fill and operational change visible across the whole site.",
-    image: "/assets/jsw-stockpile.jpg",
+    image: "/assets/mining-stockpile-v2.jpg",
     stat: "3D",
     statLabel: "volume evidence",
     outputs: ["Stockpile volumes", "Progress surfaces", "Compliance records"],
@@ -48,7 +48,7 @@ const sectors = [
     tag: "CORRIDOR MAPPING",
     title: "See the whole corridor, not isolated snapshots.",
     text: "High-accuracy mapping creates a single spatial record for planning, construction progress and asset condition.",
-    image: "/assets/highway.jpg",
+    image: "/assets/highway-corridor-v2.jpg",
     stat: "cm",
     statLabel: "positioning precision",
     outputs: ["Engineering base map", "CAD-ready layers", "Change detection"],
@@ -58,7 +58,7 @@ const sectors = [
     tag: "LAND INTELLIGENCE",
     title: "Turn large landscapes into clear next actions.",
     text: "Multispectral, terrain and boundary intelligence supports faster decisions across agriculture and land development.",
-    image: "/assets/agriculture.jpg",
+    image: "/assets/agriculture-survey-v2.jpg",
     stat: "5x",
     statLabel: "faster site insight",
     outputs: ["Crop health indices", "Terrain model", "Boundary intelligence"],
@@ -68,7 +68,7 @@ const sectors = [
     tag: "LIDAR & MONITORING",
     title: "Read the terrain beneath the complexity.",
     text: "LiDAR and repeat monitoring reveal bare earth, canopy structure and environmental change with precision.",
-    image: "/assets/lidar-forest.jpg",
+    image: "/assets/lidar-forest-v2.jpg",
     stat: "360°",
     statLabel: "environmental context",
     outputs: ["Classified point cloud", "Bare-earth DTM", "Change evidence"],
@@ -76,10 +76,10 @@ const sectors = [
 ];
 
 const projects = [
-  { image: "/assets/jsw-stockpile.jpg", type: "MINING", title: "Industrial stockpile intelligence", metric: "VOLUME RECONCILIATION" },
-  { image: "/assets/thermal-panels.jpg", type: "ENERGY", title: "Solar thermal inspection", metric: "PANEL-LEVEL ANOMALIES" },
-  { image: "/assets/railway.jpg", type: "INFRASTRUCTURE", title: "Rail corridor mapping", metric: "ENGINEERING BASE MAP" },
-  { image: "/assets/heritage.jpg", type: "HERITAGE", title: "Digital preservation survey", metric: "HIGH-FIDELITY 3D" },
+  { image: "/assets/mining-stockpile-v2.jpg", type: "MINING", title: "Industrial stockpile intelligence", metric: "VOLUME RECONCILIATION" },
+  { image: "/assets/solar-thermal-v2.jpg", type: "ENERGY", title: "Solar thermal inspection", metric: "PANEL-LEVEL ANOMALIES" },
+  { image: "/assets/railway-corridor-v2.jpg", type: "INFRASTRUCTURE", title: "Rail corridor mapping", metric: "ENGINEERING BASE MAP" },
+  { image: "/assets/heritage-scan-v2.jpg", type: "HERITAGE", title: "Digital preservation survey", metric: "HIGH-FIDELITY 3D" },
 ];
 
 const capabilities = [
@@ -133,7 +133,7 @@ export default function Home() {
       </header>
 
       <section className="hero" id="top">
-        <img className="hero-image" src="/assets/mission-map.jpg" alt="Aerial survey mission map" />
+        <img className="hero-image" src="/assets/hero-aerial-v2.jpg" alt="Drone surveying an infrastructure corridor at blue hour" />
         <div className="hero-shade" />
         <div className="survey-grid" aria-hidden="true" />
         <div className="hero-content">
@@ -191,9 +191,9 @@ export default function Home() {
           <div className="compare-legend"><span><i className="rgb-dot" /> RGB CAPTURE</span><span><i className="thermal-dot" /> THERMAL LAYER</span></div>
         </div>
         <div className="image-compare">
-          <img src="/assets/solar-mapping.jpg" alt="Solar site RGB aerial capture" />
+          <img src="/assets/solar-rgb-v2.jpg" alt="RGB drone capture of a utility-scale solar farm" />
           <div className="thermal-layer" style={{ clipPath: `inset(0 ${100 - compare}% 0 0)` }}>
-            <img src="/assets/thermal-panels.jpg" alt="Thermal inspection layer" />
+            <img src="/assets/solar-thermal-v2.jpg" alt="Matching thermal inspection of the solar farm" />
           </div>
           <div className="compare-line" style={{ left: `${compare}%` }}><span><Eye size={20} /></span></div>
           <input type="range" min="8" max="92" value={compare} onChange={(event) => setCompare(Number(event.target.value))} aria-label="Reveal thermal inspection layer" />
@@ -216,6 +216,7 @@ export default function Home() {
         <div className="sector-stage" key={sector.name}>
           <img src={sector.image} alt={`${sector.name} aerial survey`} />
           <div className="sector-overlay" />
+          <div className="geo-overlay" aria-hidden="true"><i /><i /><i /><span /></div>
           <div className="sector-story">
             <small>{sector.tag}</small>
             <h3>{sector.title}</h3>
@@ -251,6 +252,7 @@ export default function Home() {
             <article className={`project project-${index + 1}`} key={project.title} data-reveal>
               <img src={project.image} alt={project.title} />
               <div className="project-shade" />
+              <div className="project-reticle" aria-hidden="true"><i /><i /></div>
               <span>{project.type}</span><h3>{project.title}</h3><p>{project.metric}</p><ArrowRight />
             </article>
           ))}

@@ -23,5 +23,8 @@ test("server-renders The Atlas Grid experience", async () => {
   assert.match(html, /THE ATLAS GRID/);
   assert.match(html, /Aerial intelligence for decisions/);
   assert.match(html, /SURVEY SCOPE/);
+  assert.match(html, /hero-aerial-v2\.jpg/);
+  assert.match(html, /solar-rgb-v2\.jpg/);
+  assert.match(html, /solar-thermal-v2\.jpg/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
