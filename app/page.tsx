@@ -13,7 +13,6 @@ import {
   Map,
   Menu,
   Mountain,
-  Radio,
   ScanLine,
   Send,
   ThermometerSun,
@@ -135,7 +134,6 @@ export default function Home() {
       <section className="hero" id="top">
         <img className="hero-image" src="/assets/hero-aerial-v2.jpg" alt="Drone surveying an infrastructure corridor at blue hour" />
         <div className="hero-shade" />
-        <div className="survey-grid" aria-hidden="true" />
         <div className="hero-content">
           <p className="kicker"><i /> GLOBAL ONLINE SOLUTIONS · INDIA</p>
           <h1>THE ATLAS<br /><span>GRID</span></h1>
@@ -144,15 +142,6 @@ export default function Home() {
             <a className="button primary" href="#sectors">Enter the mission <ArrowDown size={18} /></a>
             <a className="text-link" href="#work">View fieldwork <ArrowRight size={18} /></a>
           </div>
-        </div>
-        <div className="mission-hud" aria-label="Sample live mission data">
-          <div className="hud-top"><Radio size={16} /><span>MISSION 24A</span><b>LIVE</b></div>
-          <div className="radar"><span className="radar-sweep" /><i className="target target-one" /><i className="target target-two" /><Crosshair size={20} /></div>
-          <dl>
-            <div><dt>POSITION</dt><dd>12.9716° N</dd></div>
-            <div><dt>ALTITUDE</dt><dd>120 M AGL</dd></div>
-            <div><dt>ACCURACY</dt><dd><em /> 1.8 CM</dd></div>
-          </dl>
         </div>
         <div className="hero-index"><span>SCROLL TO EXPLORE</span><i /><b>01</b><small>/ 06</small></div>
       </section>
@@ -216,7 +205,6 @@ export default function Home() {
         <div className="sector-stage" key={sector.name}>
           <img src={sector.image} alt={`${sector.name} aerial survey`} />
           <div className="sector-overlay" />
-          <div className="geo-overlay" aria-hidden="true"><i /><i /><i /><span /></div>
           <div className="sector-story">
             <small>{sector.tag}</small>
             <h3>{sector.title}</h3>
@@ -252,7 +240,6 @@ export default function Home() {
             <article className={`project project-${index + 1}`} key={project.title} data-reveal>
               <img src={project.image} alt={project.title} />
               <div className="project-shade" />
-              <div className="project-reticle" aria-hidden="true"><i /><i /></div>
               <span>{project.type}</span><h3>{project.title}</h3><p>{project.metric}</p><ArrowRight />
             </article>
           ))}
