@@ -112,6 +112,24 @@ export default function Home() {
     return () => reveal.disconnect();
   }, []);
 
+  useEffect(() => {
+    const { body, documentElement } = document;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = documentElement.style.overflow;
+    if (menuOpen) {
+      body.style.overflow = "hidden";
+      documentElement.style.overflow = "hidden";
+    } else {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+    }
+
+    return () => {
+      body.style.overflow = previousBodyOverflow;
+      documentElement.style.overflow = previousHtmlOverflow;
+    };
+  }, [menuOpen]);
+
   return (
     <main>
       <header className="site-header">
