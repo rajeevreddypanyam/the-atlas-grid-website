@@ -114,13 +114,12 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [sectorIndex, setSectorIndex] = useState(0);
   const [compare, setCompare] = useState(52);
-  const [scale, setScale] = useState("Single site");
   const [goal, setGoal] = useState("Inspection & condition");
   const sector = sectors[sectorIndex];
 
   const scope = useMemo(
-    () => `${sector.name} project · ${scale} · ${goal}`,
-    [sector.name, scale, goal],
+    () => `${sector.name} project · ${goal}`,
+    [sector.name, goal],
   );
 
   useEffect(() => {
@@ -310,11 +309,9 @@ export default function Home() {
           <input type="text" name="_honey" className="form-honey" tabIndex={-1} autoComplete="off" />
           <input type="hidden" name="Mission outline" value={scope} />
           <input type="hidden" name="Selected sector" value={sector.name} />
-          <input type="hidden" name="Project scale" value={scale} />
           <input type="hidden" name="Primary goal" value={goal} />
           <div className="form-head"><h3>Project details</h3><p>Simple choices are enough. We will confirm the technical scope with you.</p></div>
           <fieldset><legend>What type of site is this?</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
-          <fieldset><legend>How large is the project?</legend><div className="choice-grid three">{["Single site", "Multi-site", "Long corridor"].map((item) => <button type="button" key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div></fieldset>
           <label><span>Main reason for the survey</span><select value={goal} onChange={(event) => setGoal(event.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Environmental monitoring</option></select></label>
           <div className="contact-grid">
             <label><span>Your name</span><input name="Name" type="text" placeholder="Your name" required /></label>

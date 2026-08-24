@@ -22,7 +22,7 @@ test("server-renders TAGS experience", async () => {
   assert.match(html, /<title>TAGS \| Geospatial Intelligence<\/title>/i);
   assert.match(html, /TAGS/);
   assert.match(html, /Geospatial Intelligence from Ground to Sky/);
-  assert.match(html, /SURVEY SCOPE/);
+  assert.match(html, /Project details/);
   assert.match(html, /tags-logo-white\.png/);
   assert.match(html, /hero-aerial-v2\.jpg/);
   assert.match(html, /solar-rgb-v2\.jpg/);
