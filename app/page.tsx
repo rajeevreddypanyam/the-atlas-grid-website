@@ -296,9 +296,9 @@ export default function Home() {
 
       <section className="brief-section" id="brief">
         <div className="brief-copy" data-reveal>
-          <p className="kicker"><i /> SHAPE THE MISSION</p>
-          <h2>Submit your<br />project brief.</h2>
-          <p>Use this quick planner to tell us what you need surveyed. Your choices and contact details will be sent directly to our team.</p>
+          <p className="kicker"><i /> START A PROJECT</p>
+          <h2>Tell us what you need surveyed.</h2>
+          <p>Choose the closest options and add your contact details. TAGS will receive the enquiry by email and reply with the right survey approach.</p>
           <a href="mailto:hello@theatlasgrid.com">hello@theatlasgrid.com <ArrowRight size={18} /></a>
         </div>
         <form className="scope-builder" action="https://formsubmit.co/rajeev@neoglobalindustries.com" method="POST">
@@ -312,19 +312,19 @@ export default function Home() {
           <input type="hidden" name="Selected sector" value={sector.name} />
           <input type="hidden" name="Project scale" value={scale} />
           <input type="hidden" name="Primary goal" value={goal} />
-          <div className="builder-status"><span>SURVEY SCOPE / LIVE</span><b><i /> READY</b></div>
-          <fieldset><legend>01 / SECTOR</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
-          <fieldset><legend>02 / PROJECT SCALE</legend><div className="choice-grid three">{["Single site", "Multi-site", "Long corridor"].map((item) => <button type="button" key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div></fieldset>
-          <label><span>03 / PRIMARY GOAL</span><select value={goal} onChange={(event) => setGoal(event.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Environmental monitoring</option></select></label>
+          <div className="form-head"><h3>Project details</h3><p>Simple choices are enough. We will confirm the technical scope with you.</p></div>
+          <fieldset><legend>What type of site is this?</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
+          <fieldset><legend>How large is the project?</legend><div className="choice-grid three">{["Single site", "Multi-site", "Long corridor"].map((item) => <button type="button" key={item} className={scale === item ? "active" : ""} onClick={() => setScale(item)}>{item}</button>)}</div></fieldset>
+          <label><span>Main reason for the survey</span><select value={goal} onChange={(event) => setGoal(event.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Environmental monitoring</option></select></label>
           <div className="contact-grid">
-            <label><span>04 / YOUR NAME</span><input name="Name" type="text" placeholder="Your name" required /></label>
-            <label><span>05 / EMAIL</span><input name="email" type="email" placeholder="name@company.com" required /></label>
-            <label><span>06 / PHONE</span><input name="Phone" type="tel" placeholder="+91 phone number" /></label>
-            <label><span>07 / COMPANY</span><input name="Company" type="text" placeholder="Company / project name" /></label>
+            <label><span>Your name</span><input name="Name" type="text" placeholder="Your name" required /></label>
+            <label><span>Email address</span><input name="email" type="email" placeholder="name@company.com" required /></label>
+            <label><span>Phone number</span><input name="Phone" type="tel" placeholder="+91 phone number" /></label>
+            <label><span>Company or project</span><input name="Company" type="text" placeholder="Company / project name" /></label>
           </div>
-          <label><span>08 / PROJECT NOTES</span><textarea name="Project notes" placeholder="Location, approximate area, timeline, or anything important" rows={4} /></label>
-          <div className="scope-output"><small>YOUR MISSION OUTLINE</small><p>{scope}</p></div>
-          <button className="copy-scope" type="submit"><Send />Submit mission enquiry</button>
+          <label><span>Project notes</span><textarea name="Project notes" placeholder="Location, approximate area, timeline, or anything important" rows={4} /></label>
+          <div className="scope-output"><small>SUMMARY WE WILL RECEIVE</small><p>{scope}</p></div>
+          <button className="copy-scope" type="submit"><Send />Send enquiry</button>
         </form>
       </section>
 
