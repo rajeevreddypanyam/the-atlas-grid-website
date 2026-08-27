@@ -75,12 +75,12 @@ const sectors = [
   {
     name: "Land",
     tag: "LAND INTELLIGENCE",
-    title: "Turn large landscapes into clear next actions.",
+    title: "Turn large landscapes into actionable GIS layers.",
     text: "Multispectral, terrain and boundary intelligence supports faster decisions across agriculture and land development.",
     image: "/assets/agriculture-survey-v2.jpg",
     stat: "5x",
     statLabel: "faster site insight",
-    outputs: ["Crop health indices", "Terrain model", "Boundary intelligence"],
+    outputs: ["Canopy and tree-count analysis", "Terrain model", "Boundary intelligence"],
   },
   {
     name: "Environment",
@@ -102,12 +102,13 @@ const projects = [
 ];
 
 const capabilities = [
-  { icon: DroneMark, number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
+  { icon: DroneMark, number: "01", name: "Drone survey", text: "Mapping with speed, safety and accuracy." },
   { icon: Radar, number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
   { icon: ThermometerSun, number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
   { icon: Crosshair, number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
   { icon: Mountain, number: "05", name: "Photogrammetry", text: "Orthomosaics, terrain models and spatial layers engineered for use." },
   { icon: MapPinned, number: "06", name: "GIS intelligence", text: "Clear analysis that moves directly into operational decision systems." },
+  { icon: Map, number: "07", name: "Topography and CAD models", text: "Enable informed site planning with high-precision topographic data and accurate CAD models." },
 ];
 
 export default function Home() {
@@ -186,14 +187,13 @@ export default function Home() {
         <div><strong>CM</strong><span>RTK / PPK ACCURACY</span></div>
         <div><strong>2D + 3D</strong><span>ENGINEERING OUTPUTS</span></div>
         <div><strong>2,000+</strong><span>ACRES MAPPED</span></div>
-        <div><strong>12+</strong><span>INDUSTRY APPLICATIONS</span></div>
       </section>
 
       <section className="capability-section" id="capabilities">
         <div className="section-intro" data-reveal>
           <p className="kicker dark"><i /> OUR CAPABILITY</p>
-          <h2>Capture is only<br />the beginning.</h2>
-          <p>We engineer the entire chain from field evidence to a decision your team can defend.</p>
+          <h2 className="capability-headline">We don&apos;t just fly drones.<br />We deliver geospatial intelligence.</h2>
+          <p>From aerial data to actionable intelligence.</p>
         </div>
         <div className="capability-list">
           {capabilities.map(({ icon: Icon, number, name, text }) => (
@@ -283,7 +283,7 @@ export default function Home() {
       </section>
 
       <section className="deliverables">
-        <div className="deliverable-copy" data-reveal><p className="kicker"><i /> DECISION-READY OUTPUTS</p><h2>Data that arrives<br />ready to work.</h2><p>Every deliverable is prepared for the systems your engineering, planning and operations teams already use.</p></div>
+        <div className="deliverable-copy" data-reveal><p className="kicker"><i /> DECISION-READY OUTPUTS</p><h2>Data that arrives<br />ready to work.</h2><p>We bridge geospatial intelligence and engineering to connect spatial context with technical design.</p></div>
         <div className="output-orbit" aria-label="Available outputs">
           <div className="orbit-center"><Layers3 /><span>ATLAS<br />DATA CORE</span></div>
           {[["ORTHOMOSAIC", Map], ["DSM + DTM", Mountain], ["POINT CLOUD", Box], ["CAD + GIS", Crosshair], ["THERMAL", ThermometerSun], ["DASHBOARD", Eye]].map(([label, Icon], index) => {
@@ -328,7 +328,7 @@ export default function Home() {
       <footer>
         <a className="brand footer-brand" href="#top" aria-label="TAGS home"><img src="/brand/tags-logo-white.png" alt="TAGS" /></a>
         <p>Geospatial Intelligence from Ground to Sky.</p>
-        <div><span>&copy; 2026 TAGS - THE ATLAS GRID SOLUTIONS PRIVATE LIMITED</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
+        <div><span>&copy; The Atlas Grid Solutions Private Limited</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
       </footer>
     </main>
   );

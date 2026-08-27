@@ -22,6 +22,12 @@ test("server-renders TAGS experience", async () => {
   assert.match(html, /<title>TAGS \| Geospatial Intelligence<\/title>/i);
   assert.match(html, /TAGS/);
   assert.match(html, /Geospatial Intelligence from Ground to Sky/);
+  assert.match(html, /We don(?:&apos;|&#x27;|')t just fly drones/i);
+  assert.match(html, /Topography and CAD models/i);
+  assert.match(html, /Canopy and tree-count analysis/i);
+  assert.match(html, /The Atlas Grid Solutions Private Limited/i);
+  assert.doesNotMatch(html, /12\+.*INDUSTRY APPLICATIONS/i);
+  assert.doesNotMatch(html, /2026 TAGS/i);
   assert.match(html, /Project details/);
   assert.match(html, /tags-logo-white\.png/);
   assert.match(html, /hero-aerial-v2\.jpg/);
