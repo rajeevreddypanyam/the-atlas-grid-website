@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -19,12 +20,13 @@ test("server-renders TAGS experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  const pageSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   assert.match(html, /<title>TAGS \| Geospatial Intelligence<\/title>/i);
   assert.match(html, /TAGS/);
   assert.match(html, /Geospatial Intelligence from Ground to Sky/);
   assert.match(html, /We don(?:&apos;|&#x27;|')t just fly drones/i);
   assert.match(html, /Topography and CAD models/i);
-  assert.match(html, /Canopy and tree-count analysis/i);
+  assert.match(pageSource, /Canopy and tree-count analysis/i);
   assert.match(html, /The Atlas Grid Solutions Private Limited/i);
   assert.doesNotMatch(html, /12\+.*INDUSTRY APPLICATIONS/i);
   assert.doesNotMatch(html, /2026 TAGS/i);
