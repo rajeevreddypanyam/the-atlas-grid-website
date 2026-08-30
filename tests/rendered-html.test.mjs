@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render(path = "/") {
@@ -19,15 +20,22 @@ test("server-renders TAGS experience", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
+  const pageSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
   assert.match(html, /<title>TAGS \| Geospatial Intelligence<\/title>/i);
   assert.match(html, /TAGS/);
   assert.match(html, /Geospatial Intelligence from Ground to Sky/);
+  assert.match(html, /We don(?:&apos;|&#x27;|')t just fly drones/i);
+  assert.match(html, /Topography and CAD models/i);
+  assert.match(pageSource, /Canopy and tree-count analysis/i);
+  assert.match(html, /The Atlas Grid Solutions Private Limited/i);
+  assert.doesNotMatch(html, /12\+.*INDUSTRY APPLICATIONS/i);
+  assert.doesNotMatch(html, /2026 TAGS/i);
   assert.match(html, /Project details/);
   assert.match(html, /tags-logo-white\.png/);
   assert.match(html, /hero-aerial-v2\.jpg/);
   assert.match(html, /solar-rgb-v2\.jpg/);
   assert.match(html, /solar-thermal-v2\.jpg/);
-  for (const slug of ["drone-survey", "lidar-mapping", "thermal-inspection", "rtk-ppk", "photogrammetry", "gis-intelligence"]) {
+  for (const slug of ["drone-survey", "lidar-mapping", "thermal-inspection", "rtk-ppk", "photogrammetry", "gis-intelligence", "topography-cad-models"]) {
     assert.match(html, new RegExp(`href=["']\\/capabilities\\/${slug}["']`));
   }
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
@@ -41,6 +49,7 @@ test("server-renders every capability guide", async () => {
     ["rtk-ppk", "RTK / PPK", "Correction method"],
     ["photogrammetry", "Photogrammetry", "Reconstruction"],
     ["gis-intelligence", "GIS intelligence", "Layer structure"],
+    ["topography-cad-models", "Topography and CAD models", "Terrain model"],
   ];
 
   for (const [slug, name, reportTerm] of pages) {

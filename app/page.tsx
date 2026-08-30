@@ -76,12 +76,12 @@ const sectors = [
   {
     name: "Land",
     tag: "LAND INTELLIGENCE",
-    title: "Turn large landscapes into clear next actions.",
+    title: "Turn large landscapes into actionable GIS layers.",
     text: "Multispectral, terrain and boundary intelligence supports faster decisions across agriculture and land development.",
     image: "/assets/agriculture-survey-v2.jpg",
     stat: "5x",
     statLabel: "faster site insight",
-    outputs: ["Crop health indices", "Terrain model", "Boundary intelligence"],
+    outputs: ["Canopy and tree-count analysis", "Terrain model", "Boundary intelligence"],
   },
   {
     name: "Environment",
@@ -109,6 +109,7 @@ const capabilityIcons = {
   "rtk-ppk": Crosshair,
   photogrammetry: Mountain,
   "gis-intelligence": MapPinned,
+  "topography-cad-models": Map,
 };
 
 export default function Home() {
@@ -154,24 +155,23 @@ export default function Home() {
         <div><strong>CM</strong><span>RTK / PPK ACCURACY</span></div>
         <div><strong>2D + 3D</strong><span>ENGINEERING OUTPUTS</span></div>
         <div><strong>2,000+</strong><span>ACRES MAPPED</span></div>
-        <div><strong>12+</strong><span>INDUSTRY APPLICATIONS</span></div>
       </section>
 
       <section className="capability-section" id="capabilities">
         <div className="section-intro" data-reveal>
           <p className="kicker dark"><i /> OUR CAPABILITY</p>
-          <h2>Capture is only<br />the beginning.</h2>
-          <p>We engineer the entire chain from field evidence to a decision your team can defend.</p>
+          <h2 className="capability-headline">We don&apos;t just fly drones.<br />We deliver geospatial intelligence.</h2>
+          <p>From aerial data to actionable intelligence.</p>
         </div>
         <div className="capability-list">
-          {capabilities.map(({ slug, number, name, summary }) => {
+          {capabilities.map(({ slug, number, name, listSummary }) => {
             const Icon = capabilityIcons[slug as keyof typeof capabilityIcons];
             return (
             <Link className="capability-row" href={`/capabilities/${slug}`} key={name} data-reveal aria-label={`Learn more about ${name}`}>
               <span className="cap-number">{number}</span>
               <Icon aria-hidden="true" />
               <h3>{name}</h3>
-              <p>{summary}</p>
+              <p>{listSummary}</p>
               <ChevronRight className="cap-arrow" aria-hidden="true" />
             </Link>
           );})}
@@ -253,7 +253,7 @@ export default function Home() {
       </section>
 
       <section className="deliverables">
-        <div className="deliverable-copy" data-reveal><p className="kicker"><i /> DECISION-READY OUTPUTS</p><h2>Data that arrives<br />ready to work.</h2><p>Every deliverable is prepared for the systems your engineering, planning and operations teams already use.</p></div>
+        <div className="deliverable-copy" data-reveal><p className="kicker"><i /> DECISION-READY OUTPUTS</p><h2>Data that arrives<br />ready to work.</h2><p>We bridge geospatial intelligence and engineering to connect spatial context with technical design.</p></div>
         <div className="output-orbit" aria-label="Available outputs">
           <div className="orbit-center"><Layers3 /><span>ATLAS<br />DATA CORE</span></div>
           {[["ORTHOMOSAIC", Map], ["DSM + DTM", Mountain], ["POINT CLOUD", Box], ["CAD + GIS", Crosshair], ["THERMAL", ThermometerSun], ["DASHBOARD", Eye]].map(([label, Icon], index) => {

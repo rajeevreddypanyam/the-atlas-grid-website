@@ -9,7 +9,7 @@ export default function SiteFooter() {
       </Link>
       <p>Geospatial Intelligence from Ground to Sky.</p>
       <div>
-        <span>&copy; 2026 TAGS - THE ATLAS GRID SOLUTIONS PRIVATE LIMITED</span>
+        <span>&copy; The Atlas Grid Solutions Private Limited</span>
         <a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a>
       </div>
     </footer>

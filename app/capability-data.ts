@@ -2,6 +2,7 @@ export type Capability = {
   slug: string;
   number: string;
   name: string;
+  listSummary: string;
   eyebrow: string;
   title: string;
   summary: string;
@@ -24,6 +25,7 @@ export const capabilities: Capability[] = [
     slug: "drone-survey",
     number: "01",
     name: "Drone survey",
+    listSummary: "Mapping with speed, safety and accuracy.",
     eyebrow: "REPEATABLE AERIAL EVIDENCE",
     title: "See the whole site. Measure what changes.",
     summary:
@@ -81,6 +83,7 @@ export const capabilities: Capability[] = [
     slug: "lidar-mapping",
     number: "02",
     name: "LiDAR mapping",
+    listSummary: "Dense point clouds and bare-earth terrain in complex environments.",
     eyebrow: "DENSE TERRAIN INTELLIGENCE",
     title: "Reveal the ground beneath the complexity.",
     summary:
@@ -138,6 +141,7 @@ export const capabilities: Capability[] = [
     slug: "thermal-inspection",
     number: "03",
     name: "Thermal inspection",
+    listSummary: "Located heat anomalies for energy assets and built infrastructure.",
     eyebrow: "LOCATED ASSET ANOMALIES",
     title: "Find abnormal heat before it becomes a failure.",
     summary:
@@ -195,6 +199,7 @@ export const capabilities: Capability[] = [
     slug: "rtk-ppk",
     number: "04",
     name: "RTK / PPK",
+    listSummary: "Centimetre-grade positioning with the right ground-control strategy.",
     eyebrow: "CONTROLLED POSITIONING",
     title: "Anchor every observation to a reliable reference.",
     summary:
@@ -252,6 +257,7 @@ export const capabilities: Capability[] = [
     slug: "photogrammetry",
     number: "05",
     name: "Photogrammetry",
+    listSummary: "Orthomosaics, terrain models and spatial layers engineered for use.",
     eyebrow: "MEASURABLE IMAGE-BASED MODELS",
     title: "Convert overlapping imagery into spatial evidence.",
     summary:
@@ -309,6 +315,7 @@ export const capabilities: Capability[] = [
     slug: "gis-intelligence",
     number: "06",
     name: "GIS intelligence",
+    listSummary: "Clear analysis that moves directly into operational decision systems.",
     eyebrow: "SPATIAL DATA FOR DECISIONS",
     title: "Bring every layer into one decision-ready view.",
     summary:
@@ -361,6 +368,64 @@ export const capabilities: Capability[] = [
     ],
     metaDescription:
       "GIS intelligence for asset records, land information, project layers and decision-ready spatial analysis by TAGS.",
+  },
+  {
+    slug: "topography-cad-models",
+    number: "07",
+    name: "Topography and CAD models",
+    listSummary: "Enable informed site planning with high-precision topographic data and accurate CAD models.",
+    eyebrow: "ENGINEERING-READY TERRAIN",
+    title: "Build design decisions on clear ground information.",
+    summary:
+      "TAGS combines controlled survey observations, terrain processing and CAD preparation to create an accurate, usable base for planning and engineering design.",
+    overviewTitle: "Connect real site conditions with technical design.",
+    heroImage: "/assets/highway-corridor-v2.jpg",
+    heroAlt: "Aerial topographic survey of a highway corridor and surrounding terrain",
+    secondaryImage: "/assets/mining-stockpile-v2.jpg",
+    secondaryAlt: "Detailed terrain and operational features captured for topographic modelling",
+    solves: [
+      "Replace incomplete site sketches with a coordinated and measurable terrain record.",
+      "Represent levels, breaks, visible features and project context in engineering-ready layers.",
+      "Prepare a clear base that survey, planning, GIS and CAD teams can review together.",
+    ],
+    applications: [
+      {
+        title: "Site planning and design",
+        text: "Map terrain, access, drainage context and visible constraints before engineering design begins.",
+      },
+      {
+        title: "Corridor base mapping",
+        text: "Create continuous topographic and CAD context for roads, railways, utilities and rights-of-way.",
+      },
+      {
+        title: "Earthworks and grading",
+        text: "Prepare surfaces, contours and sections that support levels, quantities and grading review.",
+      },
+    ],
+    workflow: [
+      { number: "01", title: "Define", text: "Confirm design purpose, coordinate system, extent, accuracy and required CAD standard." },
+      { number: "02", title: "Survey", text: "Capture aerial and ground observations with the appropriate control strategy." },
+      { number: "03", title: "Model", text: "Build terrain surfaces, contours, breaklines and mapped feature layers." },
+      { number: "04", title: "Draft", text: "Organise verified information into coordinated CAD and spatial deliverables." },
+    ],
+    deliverables: [
+      { name: "Topographic base map", formats: "DWG / DXF / GIS" },
+      { name: "Terrain surface", formats: "DTM / TIN / GeoTIFF" },
+      { name: "Elevation mapping", formats: "Contours / spot levels" },
+      { name: "Mapped features", formats: "Breaklines / structures / access" },
+      { name: "Engineering sections", formats: "Profiles / cross-sections" },
+      { name: "Survey basis", formats: "Control and quality summary" },
+    ],
+    reportIntro:
+      "The survey basis records how the terrain and mapped features were observed, checked and organised for the supplied CAD and spatial outputs.",
+    reportRows: [
+      { label: "Design brief", detail: "Project purpose, extent, coordinate system, accuracy and CAD standard", status: "DEFINED" },
+      { label: "Survey basis", detail: "Capture method, control, field observations and feature treatment", status: "RECORDED" },
+      { label: "Terrain model", detail: "Surface, contours, breaklines, spot levels and section preparation", status: "VERIFIED" },
+      { label: "CAD register", detail: "Layers, files, units, coordinate reference and intended use", status: "ISSUED" },
+    ],
+    metaDescription:
+      "Topographic surveying and accurate CAD models for site planning, corridors, terrain and engineering design by TAGS.",
   },
 ];
 
