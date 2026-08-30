@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight, Check, ChevronRight, FileText } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, FileText } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { capabilities, getCapability } from "../../capability-data";
+import DeliverableAccordion from "../../components/DeliverableAccordion";
 import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/SiteHeader";
 
@@ -107,11 +108,7 @@ export default async function CapabilityPage({ params }: CapabilityPageProps) {
           <p className="kicker dark"><i /> DELIVERABLES</p>
           <h2>Prepared for engineering and spatial systems.</h2>
         </div>
-        <div className="deliverable-list">
-          {capability.deliverables.map((deliverable, index) => (
-            <div key={deliverable.name}><span>0{index + 1}</span><strong>{deliverable.name}</strong><small>{deliverable.formats}</small><ChevronRight /></div>
-          ))}
-        </div>
+        <DeliverableAccordion capabilitySlug={capability.slug} deliverables={capability.deliverables} />
       </section>
 
       <section className="capability-report">

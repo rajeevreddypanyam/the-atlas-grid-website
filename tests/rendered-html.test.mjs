@@ -62,6 +62,24 @@ test("server-renders every capability guide", async () => {
     assert.match(html, /INSIDE YOUR TAGS REPORT/i);
     assert.match(html, new RegExp(reportTerm, "i"));
     assert.match(html, /Discuss this service/i);
+    assert.equal((html.match(/class="deliverable-trigger"/g) ?? []).length, 6, `${name} should render six deliverables`);
+    assert.equal((html.match(/class="deliverable-trigger"[^>]+aria-expanded="false"/g) ?? []).length, 6, `${name} deliverables should start closed`);
+    assert.equal((html.match(/class="deliverable-detail"/g) ?? []).length, 6, `${name} should render six detail regions`);
+    assert.match(html, /aria-controls="[^"]+-deliverable-[1-6]-details"/i);
     assert.doesNotMatch(html, /href=["'][^"']*\.pdf/i);
+  }
+});
+
+test("all deliverables have unique 60 to 80 word explanations", async () => {
+  const source = await readFile(new URL("../app/capability-data.ts", import.meta.url), "utf8");
+  const descriptions = [...source.matchAll(/description:\s*"([^"]+)"/g)].map((match) => match[1]);
+
+  assert.equal(descriptions.length, 42);
+  assert.equal(new Set(descriptions).size, 42);
+
+  for (const description of descriptions) {
+    const wordCount = description.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)?.length ?? 0;
+    assert.ok(wordCount >= 60 && wordCount <= 80, `Description has ${wordCount} words: ${description}`);
+    assert.doesNotMatch(description, /client name|confidential|guaranteed result/i);
   }
 });
