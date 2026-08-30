@@ -6,6 +6,7 @@ const display = Archivo({ subsets: ["latin"], variable: "--font-display" });
 const body = Manrope({ subsets: ["latin"], variable: "--font-body" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://theatlasgrid.com"),
   title: "TAGS | Geospatial Intelligence",
   description: "Geospatial Intelligence from Ground to Sky by The Atlas Grid Solutions Private Limited.",
   applicationName: "TAGS",

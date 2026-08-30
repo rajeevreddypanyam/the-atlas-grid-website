@@ -3,7 +3,6 @@
 import {
   ArrowDown,
   ArrowRight,
-  ArrowUp,
   Box,
   Check,
   ChevronRight,
@@ -12,16 +11,18 @@ import {
   Layers3,
   Map,
   MapPinned,
-  Menu,
   Mountain,
   Radar,
   ScanLine,
   Send,
   ThermometerSun,
-  X,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useMemo, useState, type SVGProps } from "react";
+import { capabilities } from "./capability-data";
+import SiteFooter from "./components/SiteFooter";
+import SiteHeader from "./components/SiteHeader";
 
 function DroneMark(props: SVGProps<SVGSVGElement>) {
   return (
@@ -101,17 +102,16 @@ const projects = [
   { image: "/assets/heritage-scan-v2.jpg", type: "HERITAGE", title: "Digital preservation survey", metric: "HIGH-FIDELITY 3D" },
 ];
 
-const capabilities = [
-  { icon: DroneMark, number: "01", name: "Drone survey", text: "Repeatable aerial capture designed around terrain, accuracy and project scale." },
-  { icon: Radar, number: "02", name: "LiDAR mapping", text: "Dense point clouds and bare-earth terrain in complex environments." },
-  { icon: ThermometerSun, number: "03", name: "Thermal inspection", text: "Located heat anomalies for energy assets and built infrastructure." },
-  { icon: Crosshair, number: "04", name: "RTK / PPK", text: "Centimetre-grade positioning with the right ground-control strategy." },
-  { icon: Mountain, number: "05", name: "Photogrammetry", text: "Orthomosaics, terrain models and spatial layers engineered for use." },
-  { icon: MapPinned, number: "06", name: "GIS intelligence", text: "Clear analysis that moves directly into operational decision systems." },
-];
+const capabilityIcons = {
+  "drone-survey": DroneMark,
+  "lidar-mapping": Radar,
+  "thermal-inspection": ThermometerSun,
+  "rtk-ppk": Crosshair,
+  photogrammetry: Mountain,
+  "gis-intelligence": MapPinned,
+};
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [sectorIndex, setSectorIndex] = useState(0);
   const [compare, setCompare] = useState(52);
   const [goal, setGoal] = useState("Inspection & condition");
@@ -131,41 +131,9 @@ export default function Home() {
     return () => reveal.disconnect();
   }, []);
 
-  useEffect(() => {
-    const { body, documentElement } = document;
-    const previousBodyOverflow = body.style.overflow;
-    const previousHtmlOverflow = documentElement.style.overflow;
-    if (menuOpen) {
-      body.style.overflow = "hidden";
-      documentElement.style.overflow = "hidden";
-    } else {
-      body.style.overflow = previousBodyOverflow;
-      documentElement.style.overflow = previousHtmlOverflow;
-    }
-
-    return () => {
-      body.style.overflow = previousBodyOverflow;
-      documentElement.style.overflow = previousHtmlOverflow;
-    };
-  }, [menuOpen]);
-
   return (
     <main>
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="TAGS home">
-          <img src="/brand/tags-logo-white.png" alt="TAGS" />
-        </a>
-        <nav className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
-          <a href="#capabilities" onClick={() => setMenuOpen(false)}>Capabilities</a>
-          <a href="#sectors" onClick={() => setMenuOpen(false)}>Sectors</a>
-          <a href="#work" onClick={() => setMenuOpen(false)}>Fieldwork</a>
-          <a href="#brief" onClick={() => setMenuOpen(false)}>Contact</a>
-        </nav>
-        <a className="header-cta" href="#brief">Start a mission <ArrowRight size={17} /></a>
-        <button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu" aria-expanded={menuOpen}>
-          {menuOpen ? <X /> : <Menu />}
-        </button>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="top">
         <img className="hero-image" src="/assets/hero-aerial-v2.jpg" alt="Drone surveying an infrastructure corridor at blue hour" />
@@ -196,15 +164,17 @@ export default function Home() {
           <p>We engineer the entire chain from field evidence to a decision your team can defend.</p>
         </div>
         <div className="capability-list">
-          {capabilities.map(({ icon: Icon, number, name, text }) => (
-            <article key={name} data-reveal>
+          {capabilities.map(({ slug, number, name, summary }) => {
+            const Icon = capabilityIcons[slug as keyof typeof capabilityIcons];
+            return (
+            <Link className="capability-row" href={`/capabilities/${slug}`} key={name} data-reveal aria-label={`Learn more about ${name}`}>
               <span className="cap-number">{number}</span>
               <Icon aria-hidden="true" />
               <h3>{name}</h3>
-              <p>{text}</p>
+              <p>{summary}</p>
               <ChevronRight className="cap-arrow" aria-hidden="true" />
-            </article>
-          ))}
+            </Link>
+          );})}
         </div>
       </section>
 
@@ -325,11 +295,7 @@ export default function Home() {
         </form>
       </section>
 
-      <footer>
-        <a className="brand footer-brand" href="#top" aria-label="TAGS home"><img src="/brand/tags-logo-white.png" alt="TAGS" /></a>
-        <p>Geospatial Intelligence from Ground to Sky.</p>
-        <div><span>&copy; 2026 TAGS - THE ATLAS GRID SOLUTIONS PRIVATE LIMITED</span><a href="#top" aria-label="Back to top">BACK TO TOP <ArrowUp size={15} /></a></div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
