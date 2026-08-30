@@ -184,7 +184,7 @@ img { display: block; max-width: 100%; }
 
 .sector-section { padding: 130px clamp(20px, 6vw, 96px); background: white; }
 .sector-head { display: grid; grid-template-columns: 1.25fr .75fr; align-items: end; gap: 40px; }
-.sector-tabs { margin-top: 62px; display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.sector-tabs { margin-top: 62px; display: grid; grid-template-columns: repeat(6, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .sector-tabs button { min-height: 88px; padding: 16px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--muted); border: 0; border-right: 1px solid var(--line); background: transparent; font-size: 11px; font-weight: 800; transition: color .25s ease, background .25s ease; }
 .sector-tabs button:last-child { border-right: 0; }.sector-tabs button span { color: #6A7C88; font-size: 8px; }.sector-tabs button:hover { color: var(--ink); }.sector-tabs button[aria-selected="true"] { color: white; background: var(--ink); }.sector-tabs button[aria-selected="true"] span { color: var(--signal); }
 .sector-stage { position: relative; height: 610px; overflow: hidden; color: white; background: var(--night); animation: stageIn .5s ease both; }
@@ -218,7 +218,7 @@ img { display: block; max-width: 100%; }
 .form-head { padding: 28px 28px 24px; border-bottom: 1px solid var(--line-dark); background: rgba(255,255,255,.035); }.form-head h3 { margin: 0; font-size: clamp(24px, 3vw, 34px); line-height: 1; color: white; }.form-head p { max-width: 540px; margin: 10px 0 0; color: rgba(255,255,255,.66); font-size: 14px; line-height: 1.55; }
 .form-honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .scope-builder fieldset, .scope-builder > label { margin: 0; padding: 24px 28px; display: grid; gap: 14px; border: 0; border-bottom: 1px solid var(--line-dark); }.scope-builder legend, .scope-builder label > span { padding: 10px 0 0; color: rgba(255,255,255,.86); font-size: 14px; font-weight: 800; }
-.choice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }.choice-grid.three { grid-template-columns: repeat(3, 1fr); }.choice-grid button { min-height: 42px; padding: 8px; color: rgba(255,255,255,.65); border: 1px solid var(--line-dark); background: transparent; font-size: 9px; font-weight: 750; }.choice-grid button:hover { color: white; border-color: rgba(184,217,142,.45); }.choice-grid button.active { color: var(--night); border-color: var(--cyan); background: var(--cyan); }
+.choice-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }.choice-grid.three, .choice-grid.sector-choices { grid-template-columns: repeat(3, 1fr); }.choice-grid button { min-height: 42px; padding: 8px; color: rgba(255,255,255,.65); border: 1px solid var(--line-dark); background: transparent; font-size: 9px; font-weight: 750; }.choice-grid button:hover { color: white; border-color: rgba(184,217,142,.45); }.choice-grid button.active { color: var(--night); border-color: var(--cyan); background: var(--cyan); }
 .choice-grid button { min-height: 48px; padding: 10px; color: rgba(255,255,255,.76); background: rgba(255,255,255,.035); font-size: 12px; }.choice-grid button.active { color: var(--night); border-color: var(--cyan); background: var(--cyan); }
 .scope-builder select, .scope-builder input, .scope-builder textarea { width: 100%; min-height: 52px; padding: 0 15px; color: white; border: 1px solid var(--line-dark); border-radius: 0; background: #082b49; font-size: 14px; }
 .scope-builder textarea { min-height: 104px; padding-block: 13px; resize: vertical; line-height: 1.5; }
@@ -243,6 +243,9 @@ footer { min-height: 190px; padding: 50px clamp(20px, 6vw, 96px); display: grid;
 @media (max-width: 980px) {
   .hero { height: 820px; }.hero-content { width: calc(100% - 300px); }.hero h1 { font-size: clamp(72px, 12vw, 120px); }
   .section-intro, .sector-head { grid-template-columns: 1fr; }.section-intro > p:last-child, .sector-head > p { margin-top: 10px; }
+  .sector-tabs { grid-template-columns: repeat(3, 1fr); }
+  .sector-tabs button:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
+  .sector-tabs button:nth-child(3n) { border-right: 0; }
   .compare-section { grid-template-columns: 1fr; }.compare-copy { min-height: 500px; }.image-compare { min-height: 620px; }
   .capability-row { grid-template-columns: 42px 48px minmax(160px, .8fr) 1fr 30px; }
   .process-steps { grid-template-columns: repeat(2, 1fr); }.process-steps::before { display: none; }.process-steps article { min-height: 300px; border-bottom: 1px solid var(--line-dark); }.process-steps article > svg { margin-top: 48px; }
@@ -274,7 +277,7 @@ footer { min-height: 190px; padding: 50px clamp(20px, 6vw, 96px); display: grid;
   .process-title { display: block; }.process-steps { margin-top: 55px; grid-template-columns: 1fr; }.process-steps article { min-height: 260px; padding: 30px 24px; border-left: 1px solid var(--line-dark); }.process-steps article > svg { margin-top: 36px; }
   .work-head { display: block; }.work-head > a { margin-top: 26px; width: max-content; }.project-grid { margin-top: 50px; grid-template-columns: 1fr; grid-template-rows: repeat(4, 370px); }.project-1 { grid-row: auto; }
   .deliverables { min-height: auto; padding: 86px 20px 100px; }.output-orbit { width: calc(100vw - 60px); margin-top: 30px; }.orbit-item { width: 84px; height: 64px; }.orbit-item span { font-size: 6px; }.orbit-item svg { width: 18px; }.orbit-3 { right: -5%; }.orbit-6 { left: -5%; }
-  .brief-section { padding: 88px 20px; gap: 50px; }.choice-grid { grid-template-columns: repeat(2, 1fr); }.choice-grid.three { grid-template-columns: 1fr; }.scope-builder fieldset, .scope-builder > label, .contact-grid { padding-inline: 18px; }.contact-grid { grid-template-columns: 1fr; }.scope-output { margin-inline: 18px; }.copy-scope { margin-inline: 18px; width: calc(100% - 36px); }
+  .brief-section { padding: 88px 20px; gap: 50px; }.choice-grid, .choice-grid.sector-choices { grid-template-columns: repeat(2, 1fr); }.choice-grid.three { grid-template-columns: 1fr; }.scope-builder fieldset, .scope-builder > label, .contact-grid { padding-inline: 18px; }.contact-grid { grid-template-columns: 1fr; }.scope-output { margin-inline: 18px; }.copy-scope { margin-inline: 18px; width: calc(100% - 36px); }
   footer { padding: 44px 20px; grid-template-columns: 1fr; }footer > p { justify-self: start; }footer > div { gap: 24px; }
   .capability-hero { min-height: 760px; }
   .capability-hero-content { width: 100%; padding: 120px 20px 68px; }

@@ -45,6 +45,7 @@ function DroneMark(props: SVGProps<SVGSVGElement>) {
 const sectors = [
   {
     name: "Energy",
+    showInBrief: true,
     tag: "THERMAL INTELLIGENCE",
     title: "Find the fault before it becomes the failure.",
     text: "Portfolio-scale RGB and thermal inspection turns every anomaly into a located, ranked maintenance action.",
@@ -55,6 +56,7 @@ const sectors = [
   },
   {
     name: "Mining",
+    showInBrief: true,
     tag: "VOLUME & PROGRESS",
     title: "Measure every movement. Reconcile every tonne.",
     text: "Repeatable aerial surveys make stockpiles, cut-and-fill and operational change visible across the whole site.",
@@ -65,6 +67,7 @@ const sectors = [
   },
   {
     name: "Infrastructure",
+    showInBrief: true,
     tag: "CORRIDOR MAPPING",
     title: "See the whole corridor, not isolated snapshots.",
     text: "High-accuracy mapping creates a single spatial record for planning, construction progress and asset condition.",
@@ -74,7 +77,19 @@ const sectors = [
     outputs: ["Engineering base map", "CAD-ready layers", "Change detection"],
   },
   {
+    name: "Construction",
+    showInBrief: true,
+    tag: "PROGRESS & AS-BUILT",
+    title: "Track every stage. Verify what was built.",
+    text: "Repeatable aerial surveys turn active construction sites into measurable progress records for coordination, quantities and as-built review.",
+    image: "/assets/hero-aerial-v2.jpg",
+    stat: "2D + 3D",
+    statLabel: "construction record",
+    outputs: ["Progress orthomosaic", "Earthwork surfaces", "As-built CAD/GIS"],
+  },
+  {
     name: "Land",
+    showInBrief: true,
     tag: "LAND INTELLIGENCE",
     title: "Turn large landscapes into actionable GIS layers.",
     text: "Multispectral, terrain and boundary intelligence supports faster decisions across agriculture and land development.",
@@ -85,6 +100,7 @@ const sectors = [
   },
   {
     name: "Environment",
+    showInBrief: false,
     tag: "LIDAR & MONITORING",
     title: "Read the terrain beneath the complexity.",
     text: "LiDAR and repeat monitoring reveal bare earth, canopy structure and environmental change with precision.",
@@ -94,6 +110,8 @@ const sectors = [
     outputs: ["Classified point cloud", "Bare-earth DTM", "Change evidence"],
   },
 ];
+
+const briefSectors = sectors.filter((sector) => sector.showInBrief);
 
 const projects = [
   { image: "/assets/mining-stockpile-v2.jpg", type: "MINING", title: "Industrial stockpile intelligence", metric: "VOLUME RECONCILIATION" },
@@ -203,12 +221,20 @@ export default function Home() {
         </div>
         <div className="sector-tabs" role="tablist" aria-label="Industry sectors">
           {sectors.map((item, index) => (
-            <button key={item.name} role="tab" aria-selected={sectorIndex === index} onClick={() => setSectorIndex(index)}>
+            <button
+              id={`sector-tab-${item.name.toLowerCase()}`}
+              key={item.name}
+              role="tab"
+              aria-controls="sector-panel"
+              aria-selected={sectorIndex === index}
+              tabIndex={sectorIndex === index ? 0 : -1}
+              onClick={() => setSectorIndex(index)}
+            >
               <span>0{index + 1}</span>{item.name}
             </button>
           ))}
         </div>
-        <div className="sector-stage" key={sector.name}>
+        <div className="sector-stage" id="sector-panel" role="tabpanel" aria-labelledby={`sector-tab-${sector.name.toLowerCase()}`} key={sector.name}>
           <img src={sector.image} alt={`${sector.name} aerial survey`} />
           <div className="sector-overlay" />
           <div className="sector-story">
@@ -281,7 +307,10 @@ export default function Home() {
           <input type="hidden" name="Selected sector" value={sector.name} />
           <input type="hidden" name="Primary goal" value={goal} />
           <div className="form-head"><h3>Project details</h3><p>Simple choices are enough. We will confirm the technical scope with you.</p></div>
-          <fieldset><legend>What type of site is this?</legend><div className="choice-grid">{sectors.slice(0, 4).map((item, index) => <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>)}</div></fieldset>
+          <fieldset><legend>What type of site is this?</legend><div className="choice-grid sector-choices">{briefSectors.map((item) => {
+            const index = sectors.indexOf(item);
+            return <button type="button" key={item.name} className={sectorIndex === index ? "active" : ""} onClick={() => setSectorIndex(index)}>{item.name}</button>;
+          })}</div></fieldset>
           <label><span>Main reason for the survey</span><select value={goal} onChange={(event) => setGoal(event.target.value)}><option>Inspection & condition</option><option>Topography & design</option><option>Volume & progress</option><option>Environmental monitoring</option></select></label>
           <div className="contact-grid">
             <label><span>Your name</span><input name="Name" type="text" placeholder="Your name" required /></label>

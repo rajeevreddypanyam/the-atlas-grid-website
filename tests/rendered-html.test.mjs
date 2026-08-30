@@ -35,6 +35,16 @@ test("server-renders TAGS experience", async () => {
   assert.match(html, /hero-aerial-v2\.jpg/);
   assert.match(html, /solar-rgb-v2\.jpg/);
   assert.match(html, /solar-thermal-v2\.jpg/);
+  assert.equal((html.match(/role="tab"/g) ?? []).length, 6);
+  assert.match(html, /Construction/);
+  assert.match(pageSource, /PROGRESS &amp; AS-BUILT|PROGRESS & AS-BUILT/);
+  assert.match(pageSource, /Track every stage\. Verify what was built\./);
+  assert.match(pageSource, /showInBrief/);
+  assert.doesNotMatch(pageSource, /sectors\.slice\(0,\s*4\)/);
+  const sectorChoices = html.match(/<div class="choice-grid sector-choices">([\s\S]*?)<\/div>/i)?.[1] ?? "";
+  assert.equal((sectorChoices.match(/<button/g) ?? []).length, 5);
+  assert.match(sectorChoices, /Construction/);
+  assert.doesNotMatch(sectorChoices, /Environment/);
   for (const slug of ["drone-survey", "lidar-mapping", "thermal-inspection", "rtk-ppk", "photogrammetry", "gis-intelligence", "topography-cad-models"]) {
     assert.match(html, new RegExp(`href=["']\\/capabilities\\/${slug}["']`));
   }
